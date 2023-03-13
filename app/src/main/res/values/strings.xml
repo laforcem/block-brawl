@@ -13,5 +13,7 @@
 
     <string name="game_pause_desc">Pause game and exit to main menu</string>
     <string name="back_button_desc">Go Back To Previous Screen</string>
+    <string name="setting_text_1">Sound effects </string>
+    <string name="setting_text_2">Music </string>
     <string name="leaderboard_screen_title">Leaderboard</string>
 </resources>
