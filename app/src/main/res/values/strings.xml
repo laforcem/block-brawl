@@ -4,7 +4,12 @@
     <string name="menu_button_play">Play</string>
     <string name="menu_button_leaderboard">Leaderboard</string>
     <string name="menu_button_settings">Settings</string>
+
     <string name="menu_profile_desc">Profile Button</string>
+    <string name="profile_screen_title">Profile</string>
+    <string name="profile_screen_picture_desc">Profile Picture</string>
+    <string name="profile_screen_stats_desc">Personal Stats</string>
+
     <string name="game_pause_desc">Pause game and exit to main menu</string>
     <string name="back_button_desc">Go Back To Previous Screen</string>
 </resources>
