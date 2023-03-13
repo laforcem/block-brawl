@@ -8,6 +8,7 @@
     <string name="menu_profile_desc">Profile Button</string>
     <string name="profile_screen_title">Profile</string>
     <string name="profile_screen_picture_desc">Profile Picture</string>
+    <string name="profile_screen_edit_name_desc">Change Name</string>
     <string name="profile_screen_stats_desc">Personal Stats</string>
 
     <string name="game_pause_desc">Pause game and exit to main menu</string>

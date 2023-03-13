@@ -6,6 +6,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.ElevatedButton
@@ -47,14 +48,22 @@ fun ProfileScreen() {
                 horizontalAlignment = Alignment.Start
             ) {
                 ElevatedButton(onClick = { /*TODO*/ }) {
-                    Text(text = "You")
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceAround
+                    ) {
+                        Text(text = "You")
+                        Icon(
+                            imageVector = Icons.Filled.Edit,
+                            contentDescription = stringResource(id = R.string.profile_screen_edit_name_desc),
+                        )
+                    }
                 }
                 Text(text = "you@mines.edu")
             }
         }
         ElevatedButton(onClick = { /*TODO*/ }, modifier = Modifier.fillMaxWidth()) {
             Row(
-                horizontalArrangement = Arrangement.SpaceAround,
+                horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Icon(
@@ -74,7 +83,7 @@ fun ProfilePicture() {
     Box(
         modifier = Modifier
             .clip(CircleShape)
-            .background(Color.Green)
+            .background(Color.LightGray)
             .size(100.dp),
         contentAlignment = Alignment.Center
     ) {
