@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
+import edu.mines.csci448.pcm.blockbrawl.presentation.navigation.mainmenu.MainMenuScreen
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
 
 object MainMenuScreenSpec : IScreenSpec{
@@ -21,6 +22,12 @@ object MainMenuScreenSpec : IScreenSpec{
         navBackStackEntry: NavBackStackEntry,
         context: Context
     ) {
-
+        MainMenuScreen(
+            blockBrawlViewModel,
+            { navController.navigate( ProfileScreenSpec.route ) },
+            { navController.navigate( GameScreenSpec.route ) },
+            { navController.navigate( LeaderboardListScreenSpec.route ) },
+            { navController.navigate( SettingsScreenSpec.route ) }
+        )
     }
 }
