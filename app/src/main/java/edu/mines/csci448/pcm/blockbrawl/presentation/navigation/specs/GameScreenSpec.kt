@@ -3,6 +3,7 @@ package edu.mines.csci448.pcm.blockbrawl.presentation.navigation.specs
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.navigation.*
+import edu.mines.csci448.pcm.blockbrawl.presentation.navigation.gamescreen.GameScreen
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
 
 object GameScreenSpec : IScreenSpec {
@@ -19,7 +20,10 @@ object GameScreenSpec : IScreenSpec {
         navBackStackEntry: NavBackStackEntry,
         context: Context
     ) {
-
+        GameScreen(
+            blockBrawlViewModel = blockBrawlViewModel,
+            onPauseClicked = {navController.navigateUp()}
+        )
     }
 
 }

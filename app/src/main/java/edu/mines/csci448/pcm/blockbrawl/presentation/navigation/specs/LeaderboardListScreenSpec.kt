@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
+import edu.mines.csci448.pcm.blockbrawl.presentation.navigation.LeaderboardListScreen.LeaderboardListScreen
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
 
 object LeaderboardListScreenSpec : IScreenSpec{
@@ -21,6 +22,9 @@ object LeaderboardListScreenSpec : IScreenSpec{
         navBackStackEntry: NavBackStackEntry,
         context: Context
     ) {
-
+        LeaderboardListScreen(
+            blockBrawlViewModel = BlockBrawlViewModel(),
+            onBackClicked = { navController.navigateUp() }
+        )
     }
 }
