@@ -26,7 +26,6 @@ fun MainMenuScreen(
     onSettingsClicked: () -> Unit
 ){
     Column(modifier = Modifier.fillMaxSize()) {
-
         //Profile icon button
         Box(contentAlignment = Alignment.TopEnd, modifier = Modifier.fillMaxWidth()) {
             IconButton(onClick = { onProfileClicked() }, modifier = Modifier.size(80.dp)) {
