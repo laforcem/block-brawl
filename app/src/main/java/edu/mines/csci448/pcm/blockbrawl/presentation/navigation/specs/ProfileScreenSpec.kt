@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
+import edu.mines.csci448.pcm.blockbrawl.presentation.navigation.profilescreen.ProfileScreen
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
 
 object ProfileScreenSpec : IScreenSpec {
@@ -21,6 +22,6 @@ object ProfileScreenSpec : IScreenSpec {
         navBackStackEntry: NavBackStackEntry,
         context: Context
     ) {
-
+        ProfileScreen(onStatsClicked = { navController.navigate( PersonalStatsScreenSpec.route ) })
     }
 }

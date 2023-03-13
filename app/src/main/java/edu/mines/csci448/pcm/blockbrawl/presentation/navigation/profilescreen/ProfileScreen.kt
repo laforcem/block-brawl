@@ -6,11 +6,13 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,7 +27,9 @@ import androidx.compose.ui.unit.sp
 import edu.mines.csci448.pcm.blockbrawl.R
 
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(
+    onStatsClicked: () -> Unit,
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -41,8 +45,15 @@ fun ProfileScreen() {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            ProfilePicture()
+            Icon(
+                imageVector = Icons.Filled.AccountCircle,
+                contentDescription = stringResource(R.string.menu_profile_desc),
+                modifier = Modifier
+                    .padding(12.dp)
+                    .size(100.dp)
+            )
             Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.Start
@@ -61,7 +72,7 @@ fun ProfileScreen() {
                 Text(text = "you@mines.edu")
             }
         }
-        ElevatedButton(onClick = { /*TODO*/ }, modifier = Modifier.fillMaxWidth()) {
+        ElevatedButton(onClick = { onStatsClicked() }, modifier = Modifier.fillMaxWidth()) {
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
@@ -78,26 +89,8 @@ fun ProfileScreen() {
     }
 }
 
-@Composable
-fun ProfilePicture() {
-    Box(
-        modifier = Modifier
-            .clip(CircleShape)
-            .background(Color.LightGray)
-            .size(100.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Icon(
-            imageVector = Icons.Filled.Person,
-            contentDescription = stringResource(id = R.string.profile_screen_picture_desc),
-            modifier = Modifier.size(50.dp)
-        )
-    }
-
-}
-
 @Preview(showBackground = true)
 @Composable
 fun ProfileScreenPreview() {
-    ProfileScreen()
+    ProfileScreen {}
 }
