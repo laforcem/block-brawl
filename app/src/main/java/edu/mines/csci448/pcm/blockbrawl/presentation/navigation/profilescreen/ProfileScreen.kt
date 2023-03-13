@@ -56,11 +56,13 @@ fun ProfileScreen(
             )
             Column(
                 verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.Start
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier.fillMaxWidth(0.5f)
             ) {
                 ElevatedButton(onClick = { /*TODO*/ }) {
                     Row(
-                        horizontalArrangement = Arrangement.SpaceAround
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier.weight(1f)
                     ) {
                         Text(text = "You")
                         Icon(
@@ -74,8 +76,7 @@ fun ProfileScreen(
         }
         ElevatedButton(onClick = { onStatsClicked() }, modifier = Modifier.fillMaxWidth()) {
             Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Icon(
                     imageVector = Icons.Filled.List,
