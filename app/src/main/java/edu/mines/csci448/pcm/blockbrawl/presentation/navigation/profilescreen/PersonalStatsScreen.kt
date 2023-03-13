@@ -1,4 +1,4 @@
-package edu.mines.csci448.pcm.blockbrawl.presentation.navigation.ProfileScreen
+package edu.mines.csci448.pcm.blockbrawl.presentation.navigation.profilescreen
 
 import androidx.compose.runtime.Composable
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
