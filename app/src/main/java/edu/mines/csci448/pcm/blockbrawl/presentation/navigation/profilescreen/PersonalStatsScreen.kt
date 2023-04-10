@@ -1,4 +1,4 @@
-package edu.mines.csci448.pcm.blockbrawl.presentation.profilescreen
+package edu.mines.csci448.pcm.blockbrawl.presentation.navigation.profilescreen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -12,12 +12,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import edu.mines.csci448.pcm.blockbrawl.R
-import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
+import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
 
 @Composable
 fun PersonalStatsScreen(
-    blockBrawlViewModel: IBlockBrawlViewModel,
-    onBackClicked: () -> Unit
+                        blockBrawlViewModel: BlockBrawlViewModel,
+                        onBackClicked: () -> Unit
 ){
     Column(
         modifier = Modifier
@@ -71,8 +71,8 @@ fun PersonalStatsScreen(
     }
 }
 
-//@Preview
-//@Composable
-//private fun PreviewPersonalStatsScreen(){
-//    PersonalStatsScreen(blockBrawlViewModel = BlockBrawlViewModel(), {})
-//}
+@Preview
+@Composable
+private fun PreviewPersonalStatsScreen(){
+    PersonalStatsScreen(blockBrawlViewModel = BlockBrawlViewModel(), {})
+}

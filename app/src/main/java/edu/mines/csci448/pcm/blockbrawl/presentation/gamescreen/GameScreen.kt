@@ -15,12 +15,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import edu.mines.csci448.pcm.blockbrawl.R
-import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
+import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
 
 @Composable
 fun GameScreen(
-            blockBrawlViewModel: BlockBrawlViewModel,
-            onPauseClicked: () -> Unit
+    blockBrawlViewModel: IBlockBrawlViewModel,
+    onPauseClicked: () -> Unit
 )
 {
     Column(
@@ -45,9 +45,8 @@ fun GameScreen(
     }
 }
 
-/*
-@Preview
-@Composable
-fun GameScreenPreview(){
-    GameScreen(blockBrawlViewModel = BlockBrawlViewModel(), {})
-}*/
+//@Preview
+//@Composable
+//fun GameScreenPreview(){
+//    GameScreen(blockBrawlViewModel = BlockBrawlViewModel(), {})
+//}

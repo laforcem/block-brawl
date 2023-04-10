@@ -36,12 +36,6 @@ fun ProfileScreen(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        Text(
-            text = stringResource(id = R.string.profile_screen_title),
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth(),
-            fontSize = 32.sp
-        )
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(16.dp),

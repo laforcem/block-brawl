@@ -1,4 +1,4 @@
-package edu.mines.csci448.pcm.blockbrawl.presentation.settings
+package edu.mines.csci448.pcm.blockbrawl.presentation.navigation.settings
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -23,10 +23,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import edu.mines.csci448.pcm.blockbrawl.R
-import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
+import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
 
 @Composable
-fun SettingsScreen(blockBrawlViewModel: IBlockBrawlViewModel) {
+fun SettingsScreen(blockBrawlViewModel: BlockBrawlViewModel) {
     Column(modifier = Modifier.fillMaxSize()) {
 
         //Title Text
@@ -100,9 +100,8 @@ fun SettingsScreen(blockBrawlViewModel: IBlockBrawlViewModel) {
     }
 }
 
-/*
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun SettingsScreenPreview(){
+fun SettingsScreenPreview() {
     SettingsScreen(BlockBrawlViewModel())
-}*/
+}

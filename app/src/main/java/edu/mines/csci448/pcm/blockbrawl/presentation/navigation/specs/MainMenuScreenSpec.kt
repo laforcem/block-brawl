@@ -22,9 +22,10 @@ object MainMenuScreenSpec : IScreenSpec{
     private const val LOG_TAG = "448.MainMenuScreenSpec"
 
     override val route = "mainMenu"
+    override val title = ""
     override val arguments: List<NamedNavArgument> = emptyList()
     override fun buildRoute(vararg args: String?) = route
-
+    override fun buildTitle() = title;
     @Composable
     override fun Content(
         blockBrawlViewModel: BlockBrawlViewModel,

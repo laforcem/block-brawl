@@ -11,10 +11,12 @@ import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewMod
 object DetailedLeaderboardListSpec : IScreenSpec{
     private const val LOG_TAG = "448.DetailedLeaderboardListSpec"
 
+
     override val route = "detailedLeaderboardList"
+    override val title = "Detail"
     override val arguments: List<NamedNavArgument> = emptyList()
     override fun buildRoute(vararg args: String?) = route
-
+    override fun buildTitle() = title;
     @Composable
     override fun Content(
         blockBrawlViewModel: BlockBrawlViewModel,
