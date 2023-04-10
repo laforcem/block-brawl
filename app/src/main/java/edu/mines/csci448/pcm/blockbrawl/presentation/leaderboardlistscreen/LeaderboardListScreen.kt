@@ -29,24 +29,6 @@ fun LeaderboardListScreen(
         modifier = Modifier
             .fillMaxWidth()
     ){
-        //Pause Icon Button
-        Box(
-            contentAlignment = Alignment.CenterStart,
-            modifier = Modifier
-                .fillMaxWidth(.7f)
-        ){
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Text(
-                    text = stringResource(id = R.string.leaderboard_screen_title),
-                    fontSize = 30.sp,
-                    lineHeight = 30.sp
-                )
-            }
-        }
 
         //List of Level Leaderboards Should go Here Should implement lazy column later
         Column(

@@ -8,8 +8,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
@@ -19,6 +24,7 @@ import edu.mines.csci448.pcm.blockbrawl.R
 sealed interface IScreenSpec {
     companion object {
         private const val LOG_TAG = "448.IScreenSpec"
+
 
         val allScreens = IScreenSpec::class.sealedSubclasses.associate {
             Log.d(LOG_TAG, "allScreens: mapping route \"${it.objectInstance?.route ?: ""}\" to object \"${it.objectInstance}\"")
@@ -42,10 +48,12 @@ sealed interface IScreenSpec {
         }
 
     }
-
+    val title: String
     val route: String
     val arguments: List<NamedNavArgument>
+
     fun buildRoute(vararg args: String?): String
+    fun buildTitle(): String
 
     @Composable
     fun Content(
@@ -64,11 +72,6 @@ sealed interface IScreenSpec {
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ){
-        //var title = "";
-        //LaunchedEffect({}){
-        //    )
-        //}
-
         CenterAlignedTopAppBar(navigationIcon = if (navController.previousBackStackEntry != null) {
             {
 
@@ -83,7 +86,12 @@ sealed interface IScreenSpec {
             { }
         },
 
-            title = { blockBrawlViewModel.titleTextState.collectAsState().value },
+            title = { Text(
+                text = buildTitle(),
+                style = TextStyle(fontWeight = FontWeight.Bold),
+                fontSize = 30.sp,
+                modifier = Modifier
+            ) },
 
             actions = { TopAppBarActions(blockBrawlViewModel,
                 navController,
@@ -101,7 +109,6 @@ sealed interface IScreenSpec {
         context: Context
     ) {
     }
-
 
 }
 

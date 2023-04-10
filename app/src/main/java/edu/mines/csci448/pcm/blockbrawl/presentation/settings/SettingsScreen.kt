@@ -26,21 +26,6 @@ import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewMod
 fun SettingsScreen(blockBrawlViewModel: BlockBrawlViewModel){
     Column(modifier = Modifier.fillMaxSize()){
 
-        //Title Text
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier.wrapContentHeight(Alignment.CenterVertically).fillMaxSize()
-                .weight(0.15f)
-        ) {
-            Text(
-                text = stringResource(R.string.menu_button_settings),
-                style = TextStyle(fontWeight = FontWeight.Bold),
-                fontSize = 45.sp,
-                lineHeight = 1.2.em,
-                modifier = Modifier
-            )
-        }
-
         //Settings
         Box(
             modifier = Modifier.fillMaxSize().weight(0.85f)

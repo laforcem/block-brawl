@@ -35,6 +35,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val navController = rememberNavController()
+            mBlockBrawlViewModel.navController = navController
             val context = LocalContext.current
             Scaffold(topBar = { BlockBrawlTopBar(mBlockBrawlViewModel, navController, context) }) { padding ->
                 BlockBrawlNavHost(modifier = Modifier.padding(padding), navController, mBlockBrawlViewModel, context) }
