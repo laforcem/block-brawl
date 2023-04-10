@@ -48,8 +48,9 @@ fun LeaderboardListScreen(
     }
 }
 
-//@Preview
-//@Composable
-//private fun PreviewLeaderboardListScreen(){
-//    LeaderboardListScreen(blockBrawlViewModel = BlockBrawlViewModel(), {}, {})
-//}
+/*
+@Preview
+@Composable
+private fun PreviewLeaderboardListScreen(){
+    LeaderboardListScreen(blockBrawlViewModel = BlockBrawlViewModel(), {}, {})
+}*/

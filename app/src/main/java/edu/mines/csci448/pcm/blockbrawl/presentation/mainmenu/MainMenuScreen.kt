@@ -96,8 +96,8 @@ fun MainMenuScreen(
     }
 }
 
-//@Preview
-//@Composable
-//fun MainMenuScreenPreview(){
-//    MainMenuScreen(BlockBrawlViewModel(), {}, {}, {})
-//}
+@Preview
+@Composable
+fun MainMenuScreenPreview(){
+    MainMenuScreen(BlockBrawlViewModel(), {}, {}, {})
+}*/
