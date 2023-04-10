@@ -1,5 +1,6 @@
-package edu.mines.csci448.pcm.blockbrawl.presentation.navigation.mainmenu
+package edu.mines.csci448.pcm.blockbrawl.presentation.mainmenu
 
+import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -15,12 +16,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
-import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavHostController
+import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
+
 
 @Composable
 fun MainMenuScreen(
-    blockBrawlViewModel: BlockBrawlViewModel,
-    onProfileClicked: () -> Unit,
+    blockBrawlViewModel: IBlockBrawlViewModel,
     onPlayClicked: () -> Unit,
     onLeaderboardClicked: () -> Unit,
     onSettingsClicked: () -> Unit
@@ -28,13 +31,7 @@ fun MainMenuScreen(
     Column(modifier = Modifier.fillMaxSize()) {
         //Profile icon button
         Box(contentAlignment = Alignment.TopEnd, modifier = Modifier.fillMaxWidth()) {
-            IconButton(onClick = { onProfileClicked() }, modifier = Modifier.size(80.dp)) {
-                Icon(
-                    imageVector = Icons.Filled.AccountCircle,
-                    contentDescription = stringResource(R.string.menu_profile_desc),
-                    modifier = Modifier.padding(12.dp).size(80.dp)
-                )
-            }
+
         }
 
         //Title text
@@ -99,8 +96,8 @@ fun MainMenuScreen(
     }
 }
 
-@Preview
-@Composable
-fun MainMenuScreenPreview(){
-    MainMenuScreen(BlockBrawlViewModel(), {}, {}, {}, {})
-}
+//@Preview
+//@Composable
+//fun MainMenuScreenPreview(){
+//    MainMenuScreen(BlockBrawlViewModel(), {}, {}, {})
+//}

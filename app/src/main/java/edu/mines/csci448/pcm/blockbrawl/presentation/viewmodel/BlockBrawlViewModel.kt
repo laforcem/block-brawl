@@ -1,5 +1,8 @@
 package edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
@@ -7,12 +10,26 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class BlockBrawlViewModel : ViewModel(), IBlockBrawlViewModel  {
+class BlockBrawlViewModel : ViewModel(), IBlockBrawlViewModel {
     companion object {
         private const val LOG_TAG = "pcm.BlockBrawlViewModel"
     }
 
     lateinit var navController: NavHostController
+
+    private val mTitleTextState: MutableStateFlow<String> = MutableStateFlow("")
+    override val titleTextState: StateFlow<String>
+        get() = mTitleTextState.asStateFlow()
+
+
+    fun changeTitleText(title: String?) {
+        Log.d(LOG_TAG, "changeTitleText($title)")
+        if (title == null) {
+            mTitleTextState.value = ""
+        } else {
+            mTitleTextState.value = title;
+        }
+    }
 
     private val mSoundFxState = MutableStateFlow(true)
     override val soundFxState: StateFlow<Boolean>
