@@ -14,6 +14,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
 import edu.mines.csci448.pcm.blockbrawl.presentation.navigation.BlockBrawlNavHost
 import edu.mines.csci448.pcm.blockbrawl.presentation.navigation.BlockBrawlTopBar
@@ -22,12 +23,15 @@ import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewMod
 import edu.mines.csci448.pcm.blockbrawl.ui.theme.BlockBrawlTheme
 
 class MainActivity : ComponentActivity() {
+
+    private lateinit var mBlockBrawlViewModel: BlockBrawlViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         //create factory & view model
-        val factory = BlockBrawlViewModelFactory()
-        val mBlockBrawlViewModel = BlockBrawlViewModel() //TODO: have factory create view model
+        val factory = BlockBrawlViewModelFactory(this)
+        mBlockBrawlViewModel = ViewModelProvider(this, factory)[factory.getViewModelClass()] //TODO: have factory create view model
 
         setContent {
             val navController = rememberNavController()
