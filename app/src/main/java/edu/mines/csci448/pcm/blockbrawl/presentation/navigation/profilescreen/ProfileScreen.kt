@@ -10,10 +10,7 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.ElevatedButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,49 +39,70 @@ fun ProfileScreen(
             modifier = Modifier.fillMaxWidth(),
             fontSize = 32.sp
         )
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            verticalAlignment = Alignment.CenterVertically
+        Box(
+            contentAlignment = Alignment.TopCenter,
+            modifier = Modifier
+                .fillMaxWidth()
         ) {
-            Icon(
-                imageVector = Icons.Filled.AccountCircle,
-                contentDescription = stringResource(R.string.menu_profile_desc),
-                modifier = Modifier
-                    .padding(12.dp)
-                    .size(100.dp)
-            )
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.Start,
-                modifier = Modifier.fillMaxWidth(0.5f)
+            Row(
+                modifier = Modifier.width(325.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                ElevatedButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Filled.AccountCircle,
+                    contentDescription = stringResource(R.string.menu_profile_desc),
+                    modifier = Modifier
+                        .padding(12.dp)
+                        .size(100.dp)
+                )
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.Start,
+                    modifier = Modifier.fillMaxWidth(0.5f)
+                ) {
+                    Button(onClick = { /*TODO*/ }) {
+                        Row(
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text(text = "You")
+                            Icon(
+                                imageVector = Icons.Filled.Edit,
+                                contentDescription = stringResource(id = R.string.profile_screen_edit_name_desc),
+                            )
+                        }
+                    }
+                    Text(text = "you@mines.edu")
+                }
+            }
+        }
+        Box(
+            contentAlignment = Alignment.TopCenter,
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Column(
+                modifier = Modifier.width(325.dp),
+            ) {
+                Button(
+                    onClick = { onStatsClicked() },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                ) {
                     Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier.weight(1f)
+                        horizontalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
-                        Text(text = "You")
                         Icon(
-                            imageVector = Icons.Filled.Edit,
-                            contentDescription = stringResource(id = R.string.profile_screen_edit_name_desc),
+                            imageVector = Icons.Filled.List,
+                            contentDescription = stringResource(id = R.string.profile_screen_stats_desc),
+                        )
+                        Text(
+                            text = stringResource(id = R.string.profile_screen_stats_desc)
                         )
                     }
                 }
-                Text(text = "you@mines.edu")
-            }
-        }
-        ElevatedButton(onClick = { onStatsClicked() }, modifier = Modifier.fillMaxWidth()) {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.List,
-                    contentDescription = stringResource(id = R.string.profile_screen_stats_desc),
-                )
-                Text(
-                    text = stringResource(id = R.string.profile_screen_stats_desc)
-                )
             }
         }
     }

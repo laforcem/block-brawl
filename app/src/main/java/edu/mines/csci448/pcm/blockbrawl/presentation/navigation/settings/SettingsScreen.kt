@@ -52,8 +52,7 @@ fun SettingsScreen(blockBrawlViewModel: BlockBrawlViewModel) {
                 .fillMaxSize()
                 .weight(0.85f)
         ) {
-            Column() {
-
+            Column {
                 //Sound effects
                 Row(
                     modifier = Modifier
