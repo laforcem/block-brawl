@@ -18,13 +18,12 @@ import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
-import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
-
+import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
 
 
 @Composable
 fun MainMenuScreen(
-    blockBrawlViewModel: BlockBrawlViewModel,
+    blockBrawlViewModel: IBlockBrawlViewModel,
     onPlayClicked: () -> Unit,
     onLeaderboardClicked: () -> Unit,
     onSettingsClicked: () -> Unit
@@ -97,8 +96,8 @@ fun MainMenuScreen(
     }
 }
 
-@Preview
-@Composable
-fun MainMenuScreenPreview(){
-    MainMenuScreen(BlockBrawlViewModel(), {}, {}, {})
-}
+//@Preview
+//@Composable
+//fun MainMenuScreenPreview(){
+//    MainMenuScreen(BlockBrawlViewModel(), {}, {}, {})
+//}

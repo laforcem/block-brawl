@@ -23,8 +23,9 @@ object PersonalStatsScreenSpec : IScreenSpec{
         navBackStackEntry: NavBackStackEntry,
         context: Context
     ) {
-        PersonalStatsScreen(blockBrawlViewModel = blockBrawlViewModel) {
-
-        }
+        PersonalStatsScreen(
+            blockBrawlViewModel = blockBrawlViewModel,
+            onBackClicked = { navController.navigateUp() }
+        )
     }
 }

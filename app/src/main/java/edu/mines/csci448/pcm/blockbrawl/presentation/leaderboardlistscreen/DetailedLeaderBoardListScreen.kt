@@ -14,12 +14,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import edu.mines.csci448.pcm.blockbrawl.R
-import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
+import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
 
 @Composable
 fun DetailedLeaderboardListScreen(
-                                blockBrawlViewModel: BlockBrawlViewModel,
-                                onBackClicked: () -> Unit
+    blockBrawlViewModel: IBlockBrawlViewModel,
+    onBackClicked: () -> Unit
 ){
     Column(
         modifier = Modifier
