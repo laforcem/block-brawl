@@ -61,19 +61,17 @@ fun SettingsScreen(blockBrawlViewModel: BlockBrawlViewModel) {
                         .height(80.dp)
                         .padding(20.dp)
                 ) {
+                    Checkbox(
+                        checked = blockBrawlViewModel.soundFxState.collectAsState().value,
+                        onCheckedChange = { blockBrawlViewModel.setSoundFxState(it) },
+                        modifier = Modifier.scale(1.5f)
+                    )
                     Box(
                         contentAlignment = Alignment.CenterStart, modifier = Modifier
                             .wrapContentHeight(Alignment.CenterVertically)
                             .fillMaxHeight()
                     ) {
                         Text(text = stringResource(R.string.setting_text_1), fontSize = 30.sp)
-                    }
-                    IconButton(onClick = { }, modifier = Modifier.size(80.dp)) {
-                        Checkbox(
-                            checked = blockBrawlViewModel.soundFxState.collectAsState().value,
-                            onCheckedChange = { blockBrawlViewModel.setSoundFxState(it) },
-                            modifier = Modifier.scale(1.5f)
-                        )
                     }
                 }
 
@@ -84,6 +82,11 @@ fun SettingsScreen(blockBrawlViewModel: BlockBrawlViewModel) {
                         .height(80.dp)
                         .padding(20.dp)
                 ) {
+                    Checkbox(
+                        checked = blockBrawlViewModel.musicState.collectAsState().value,
+                        onCheckedChange = { blockBrawlViewModel.setMusicState(it) },
+                        modifier = Modifier.scale(1.5f)
+                    )
                     Box(
                         contentAlignment = Alignment.CenterStart, modifier = Modifier
                             .wrapContentHeight(Alignment.CenterVertically)
@@ -91,11 +94,6 @@ fun SettingsScreen(blockBrawlViewModel: BlockBrawlViewModel) {
                     ) {
                         Text(text = stringResource(R.string.setting_text_2), fontSize = 30.sp)
                     }
-                    Checkbox(
-                        checked = blockBrawlViewModel.musicState.collectAsState().value,
-                        onCheckedChange = { blockBrawlViewModel.setMusicState(it) },
-                        modifier = Modifier.scale(1.5f)
-                    )
                 }
             }
         }
