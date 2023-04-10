@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
-import edu.mines.csci448.pcm.blockbrawl.presentation.navigation.leaderboardlistscreen.LeaderboardListScreen
+import edu.mines.csci448.pcm.blockbrawl.presentation.leaderboardlistscreen.LeaderboardListScreen
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
 
 object LeaderboardListScreenSpec : IScreenSpec{
@@ -27,5 +27,16 @@ object LeaderboardListScreenSpec : IScreenSpec{
             onBackClicked = { navController.navigateUp() },
             onLeaderBoardItemClicked = { navController.navigate( DetailedLeaderboardListSpec.route ) }
         )
+    }
+
+    @Composable
+    override fun TopAppBarActions(
+        blockBrawlViewModel: BlockBrawlViewModel,
+        navController: NavHostController,
+        navBackStackEntry: NavBackStackEntry?,
+        context: Context
+    ){
+
+
     }
 }

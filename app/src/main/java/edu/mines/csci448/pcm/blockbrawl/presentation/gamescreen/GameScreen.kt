@@ -1,4 +1,4 @@
-package edu.mines.csci448.pcm.blockbrawl.presentation.navigation.gamescreen
+package edu.mines.csci448.pcm.blockbrawl.presentation.gamescreen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -27,26 +27,6 @@ fun GameScreen(
         modifier = Modifier
             .fillMaxWidth()
     ){
-        //Pause Icon Button
-        Box(
-            contentAlignment = Alignment.TopStart,
-            modifier = Modifier
-                .fillMaxWidth()
-        ){
-            IconButton(
-                onClick = { onPauseClicked() },
-                modifier = Modifier
-                    .size(55.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = stringResource(R.string.game_pause_desc),
-                    modifier = Modifier
-                        .padding(12.dp)
-                        .size(80.dp)
-                )
-            }
-        }
 
         //Game Content Would go here
         Box(

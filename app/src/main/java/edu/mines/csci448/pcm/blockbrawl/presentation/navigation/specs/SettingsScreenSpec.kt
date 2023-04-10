@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
-import edu.mines.csci448.pcm.blockbrawl.presentation.navigation.settings.SettingsScreen
+import edu.mines.csci448.pcm.blockbrawl.presentation.settings.SettingsScreen
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
 
 object SettingsScreenSpec : IScreenSpec{

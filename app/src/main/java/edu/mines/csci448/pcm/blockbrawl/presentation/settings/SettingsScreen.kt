@@ -1,4 +1,4 @@
-package edu.mines.csci448.pcm.blockbrawl.presentation.navigation.settings
+package edu.mines.csci448.pcm.blockbrawl.presentation.settings
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons

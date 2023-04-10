@@ -1,4 +1,4 @@
-package edu.mines.csci448.pcm.blockbrawl.presentation.navigation.profilescreen
+package edu.mines.csci448.pcm.blockbrawl.presentation.profilescreen
 
 import android.graphics.drawable.shapes.Shape
 import androidx.compose.foundation.background
@@ -28,7 +28,7 @@ import edu.mines.csci448.pcm.blockbrawl.R
 
 @Composable
 fun ProfileScreen(
-    onStatsClicked: () -> Unit,
+    onStatsClicked: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -93,5 +93,5 @@ fun ProfileScreen(
 @Preview(showBackground = true)
 @Composable
 fun ProfileScreenPreview() {
-    ProfileScreen {}
+    //ProfileScreen {}
 }

@@ -2,10 +2,11 @@ package edu.mines.csci448.pcm.blockbrawl.presentation.navigation.specs
 
 import android.content.Context
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
-import edu.mines.csci448.pcm.blockbrawl.presentation.navigation.profilescreen.ProfileScreen
+import edu.mines.csci448.pcm.blockbrawl.presentation.profilescreen.ProfileScreen
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
 
 object ProfileScreenSpec : IScreenSpec {

@@ -1,4 +1,4 @@
-package edu.mines.csci448.pcm.blockbrawl.presentation.navigation.leaderboardlistscreen
+package edu.mines.csci448.pcm.blockbrawl.presentation.leaderboardlistscreen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -25,26 +25,6 @@ fun DetailedLeaderboardListScreen(
         modifier = Modifier
             .fillMaxWidth()
     ){
-        //Pause Icon Button
-        Box(
-            contentAlignment = Alignment.TopStart,
-            modifier = Modifier
-                .fillMaxWidth()
-        ){
-            IconButton(
-                onClick = { onBackClicked() },
-                modifier = Modifier
-                    .size(55.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = stringResource(R.string.game_pause_desc),
-                    modifier = Modifier
-                        .padding(12.dp)
-                        .size(80.dp)
-                )
-            }
-        }
 
         //Game Content Would go here
         Box(

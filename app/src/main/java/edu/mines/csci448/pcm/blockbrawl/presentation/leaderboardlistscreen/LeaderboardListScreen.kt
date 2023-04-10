@@ -1,4 +1,4 @@
-package edu.mines.csci448.pcm.blockbrawl.presentation.navigation.leaderboardlistscreen
+package edu.mines.csci448.pcm.blockbrawl.presentation.leaderboardlistscreen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -40,19 +40,6 @@ fun LeaderboardListScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ){
-                IconButton(
-                    onClick = { onBackClicked() },
-                    modifier = Modifier
-                        .size(55.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = stringResource(R.string.back_button_desc),
-                        modifier = Modifier
-                            .padding(12.dp)
-                            .size(80.dp)
-                    )
-                }
                 Text(
                     text = stringResource(id = R.string.leaderboard_screen_title),
                     fontSize = 30.sp,
