@@ -71,8 +71,8 @@ fun PersonalStatsScreen(
     }
 }
 
-@Preview
-@Composable
-private fun PreviewPersonalStatsScreen(){
-    PersonalStatsScreen(blockBrawlViewModel = BlockBrawlViewModel(), {})
-}
+//@Preview
+//@Composable
+//private fun PreviewPersonalStatsScreen(){
+//    PersonalStatsScreen(blockBrawlViewModel = BlockBrawlViewModel(), {})
+//}

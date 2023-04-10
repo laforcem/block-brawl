@@ -100,8 +100,8 @@ fun SettingsScreen(blockBrawlViewModel: BlockBrawlViewModel) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun SettingsScreenPreview() {
-    SettingsScreen(BlockBrawlViewModel())
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun SettingsScreenPreview() {
+//    SettingsScreen(BlockBrawlViewModel())
+//}

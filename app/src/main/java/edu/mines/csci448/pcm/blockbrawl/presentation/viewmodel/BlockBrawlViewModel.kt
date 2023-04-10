@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class BlockBrawlViewModel : ViewModel(), IBlockBrawlViewModel {
+class BlockBrawlViewModel(private val blockBrawlRepo: BlockBrawlRepo) : ViewModel(), IBlockBrawlViewModel {
     companion object {
         private const val LOG_TAG = "pcm.BlockBrawlViewModel"
     }
