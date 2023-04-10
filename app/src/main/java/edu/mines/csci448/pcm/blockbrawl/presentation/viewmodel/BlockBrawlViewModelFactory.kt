@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlRepo
 
 class BlockBrawlViewModelFactory (private val context: Context) : ViewModelProvider.NewInstanceFactory() {
     companion object {
@@ -17,8 +18,8 @@ class BlockBrawlViewModelFactory (private val context: Context) : ViewModelProvi
         if(modelClass.isAssignableFrom(getViewModelClass())) {
             Log.d(LOG_TAG, "creating ViewModel: ${getViewModelClass()}")
             return modelClass
-                .getConstructor()
-                .newInstance()
+                .getConstructor(BlockBrawlRepo::class.java)
+                .newInstance(BlockBrawlRepo.getInstance(context))
         }
         Log.e(LOG_TAG, "Unknown ViewModel: $modelClass")
         throw IllegalArgumentException("Unknown ViewModel")

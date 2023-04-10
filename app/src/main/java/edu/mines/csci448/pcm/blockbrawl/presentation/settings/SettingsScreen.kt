@@ -79,8 +79,9 @@ fun SettingsScreen(blockBrawlViewModel: BlockBrawlViewModel){
     }
 }
 
+/*
 @Preview
 @Composable
 fun SettingsScreenPreview(){
     SettingsScreen(BlockBrawlViewModel())
-}
+}*/

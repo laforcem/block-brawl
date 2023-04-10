@@ -23,7 +23,7 @@ object LeaderboardListScreenSpec : IScreenSpec{
         context: Context
     ) {
         LeaderboardListScreen(
-            blockBrawlViewModel = BlockBrawlViewModel(),
+            blockBrawlViewModel = blockBrawlViewModel,
             onBackClicked = { navController.navigateUp() },
             onLeaderBoardItemClicked = { navController.navigate( DetailedLeaderboardListSpec.route ) }
         )

@@ -45,8 +45,9 @@ fun GameScreen(
     }
 }
 
+/*
 @Preview
 @Composable
 fun GameScreenPreview(){
     GameScreen(blockBrawlViewModel = BlockBrawlViewModel(), {})
-}
+}*/

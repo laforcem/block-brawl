@@ -36,7 +36,7 @@ private constructor(private val blockBrawlDao: BlockBrawlDao, private val corout
     }
     fun getLevelStats(): Flow<List<BlockBrawlLevel>> = blockBrawlDao.getLevelStats()
     suspend fun getStatsByLevelId(id: UUID): BlockBrawlLevel? = blockBrawlDao.getStatsByLevelId(id)
-    fun deleteCharacter(level: BlockBrawlLevel) {
+    fun deleteLevel(level: BlockBrawlLevel) {
         coroutineScope.launch {
             blockBrawlDao.deleteLevel(level)
         }

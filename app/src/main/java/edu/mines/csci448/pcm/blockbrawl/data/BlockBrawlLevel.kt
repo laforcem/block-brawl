@@ -7,4 +7,8 @@ import java.util.*
 @Entity(tableName = "levels")
 data class BlockBrawlLevel(
                             @PrimaryKey
-                            val levelId: UUID)
+                            val id: UUID,
+                            val levelNumber: Int,
+                            val completion: Boolean,
+                            val completionTime: Int,
+                            )
