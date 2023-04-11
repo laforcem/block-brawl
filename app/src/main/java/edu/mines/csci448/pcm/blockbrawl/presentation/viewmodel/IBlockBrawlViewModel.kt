@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.StateFlow
 import java.util.*
 
 interface IBlockBrawlViewModel {
+    // TODO: Refactor project to use this interface
     val soundFxState: StateFlow<Boolean>
     val musicState: StateFlow<Boolean>
     val titleTextState: StateFlow<String>
