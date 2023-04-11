@@ -16,5 +16,7 @@
     <string name="setting_text_1">Sound effects </string>
     <string name="setting_text_2">Music </string>
     <string name="leaderboard_screen_title">Leaderboard</string>
+
+    <string name ="app_bar_back_desc">Back Button</string>
     <string name="personal_stats_title">Personal Stats</string>
 </resources>

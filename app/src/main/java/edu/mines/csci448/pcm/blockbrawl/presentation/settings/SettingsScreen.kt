@@ -1,4 +1,4 @@
-package edu.mines.csci448.pcm.blockbrawl.presentation.navigation.settings
+package edu.mines.csci448.pcm.blockbrawl.presentation.settings
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -15,6 +15,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -23,29 +24,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import edu.mines.csci448.pcm.blockbrawl.R
+import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlRepo
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
+import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
 
 @Composable
-fun SettingsScreen(blockBrawlViewModel: BlockBrawlViewModel) {
+fun SettingsScreen(blockBrawlViewModel: IBlockBrawlViewModel) {
     Column(modifier = Modifier.fillMaxSize()) {
-
-        //Title Text
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .wrapContentHeight(Alignment.CenterVertically)
-                .fillMaxSize()
-                .weight(0.15f)
-        ) {
-            Text(
-                text = stringResource(R.string.menu_button_settings),
-                style = TextStyle(fontWeight = FontWeight.Bold),
-                fontSize = 45.sp,
-                lineHeight = 1.2.em,
-                modifier = Modifier
-            )
-        }
-
         //Settings
         Box(
             modifier = Modifier
@@ -99,8 +84,12 @@ fun SettingsScreen(blockBrawlViewModel: BlockBrawlViewModel) {
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
-fun SettingsScreenPreview() {
-    SettingsScreen(BlockBrawlViewModel())
+fun SettingsScreenPreview(){
+    val context = LocalContext.current
+    val repo = BlockBrawlRepo.getInstance(context)
+    val viewModel = BlockBrawlViewModel(repo)
+    SettingsScreen(viewModel)
 }
