@@ -37,8 +37,11 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             mBlockBrawlViewModel.navController = navController
             val context = LocalContext.current
-            Scaffold(topBar = { BlockBrawlTopBar(mBlockBrawlViewModel, navController, context) }) { padding ->
-                BlockBrawlNavHost(modifier = Modifier.padding(padding), navController, mBlockBrawlViewModel, context) }
+
+            BlockBrawlTheme() {
+                Scaffold(topBar = { BlockBrawlTopBar(mBlockBrawlViewModel, navController, context) }) { padding ->
+                    BlockBrawlNavHost(modifier = Modifier.padding(padding), navController, mBlockBrawlViewModel, context) }
+            }
             //BlockBrawlTheme {
                 // A surface container using the 'background' color from the theme
               //  Surface(
