@@ -10,7 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.tooling.preview.Preview
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
+import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.PreviewBlockBrawlViewModel
 
 @Composable
 fun GameScreen(
@@ -81,8 +83,8 @@ fun getTappedBlock(offset: Offset): Block? {
     return null
 }
 
-//@Preview
-//@Composable
-//fun GameScreenPreview(){
-//    GameScreen(blockBrawlViewModel = BlockBrawlViewModel(), {})
-//}
+@Preview(showBackground = true)
+@Composable
+fun GameScreenPreview(){
+    GameScreen(blockBrawlViewModel = PreviewBlockBrawlViewModel()) {}
+}
