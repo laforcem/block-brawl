@@ -12,16 +12,17 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 class Block(
     var x_pos: Float,
     var y_pos: Float,
-    val shape: Array<Array<Boolean>>,
+    val shape: Array<Pair<Int, Int>>,
     val color: Color,
     val canvasWidth: Float,
     val canvasHeight: Float,
     val gameboard_size: Int
-    ) {
+) {
     val WIDTH = canvasWidth / gameboard_size
 }
 
 fun DrawScope.drawBlock(block: Block, offsetX: Float, offsetY: Float){
+
     drawRect(
         color = block.color,
         size = Size(width = block.WIDTH, height = block.WIDTH),
