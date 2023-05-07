@@ -83,4 +83,12 @@ class PreviewBlockBrawlViewModel() :
         Log.d(LOG_TAG, "setUsername($username)")
         mUsername.value = username
     }
+
+    override fun getStatsByLevelNumber(levelNumber: Int) {
+
+    }
+
+    override fun getBestLevelStats(levelNumber: Int) {
+
+    }
 }

@@ -27,7 +27,10 @@ object LeaderboardListScreenSpec : IScreenSpec{
         LeaderboardListScreen(
             blockBrawlViewModel = blockBrawlViewModel,
             onBackClicked = { navController.navigateUp() },
-            onLeaderBoardItemClicked = { navController.navigate( DetailedLeaderboardListSpec.route ) }
+            onLeaderBoardItemClicked = {
+                blockBrawlViewModel.getStatsByLevelNumber(it)
+                navController.navigate( DetailedLeaderboardListSpec.route )
+            }
         )
     }
 
