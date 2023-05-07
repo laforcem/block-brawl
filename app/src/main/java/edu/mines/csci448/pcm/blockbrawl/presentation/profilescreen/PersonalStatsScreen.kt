@@ -17,32 +17,30 @@ import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlRepo
 import edu.mines.csci448.pcm.blockbrawl.presentation.settings.SettingsScreen
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
+import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.PreviewBlockBrawlViewModel
 
 @Composable
 fun PersonalStatsScreen(
     blockBrawlViewModel: IBlockBrawlViewModel,
     onBackClicked: () -> Unit
 ){
-        //List of Level Leaderboards Should go Here Should implement lazy column later
-        Column(
+    //List of Level Leaderboards Should go Here Should implement lazy column later
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+    ){
+        Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight()
         ){
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-            ){
-                Text(text = "Test Stats Card for each Level")
-            }
+            Text(text = "Test Stats Card for each Level")
         }
     }
+}
 
 @Preview(showBackground = true)
 @Composable
 private fun PreviewPersonalStatsScreen(){
-    val context = LocalContext.current
-    val repo = BlockBrawlRepo.getInstance(context)
-    val viewModel = BlockBrawlViewModel(repo)
-    PersonalStatsScreen(viewModel) {}
+    PersonalStatsScreen(PreviewBlockBrawlViewModel()) {}
 }

@@ -11,10 +11,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import edu.mines.csci448.pcm.blockbrawl.R
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
+import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.PreviewBlockBrawlViewModel
 
 @Composable
 fun DetailedLeaderboardListScreen(
@@ -25,7 +27,6 @@ fun DetailedLeaderboardListScreen(
         modifier = Modifier
             .fillMaxWidth()
     ){
-
         //Game Content Would go here
         Box(
             contentAlignment = Alignment.CenterStart,
@@ -41,4 +42,13 @@ fun DetailedLeaderboardListScreen(
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewDetailedLeaderboardListScreen(){
+    DetailedLeaderboardListScreen(
+        blockBrawlViewModel = PreviewBlockBrawlViewModel(),
+        onBackClicked = {}
+    )
 }

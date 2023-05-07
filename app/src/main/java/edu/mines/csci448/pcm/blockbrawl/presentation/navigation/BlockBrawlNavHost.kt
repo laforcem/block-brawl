@@ -9,11 +9,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import edu.mines.csci448.pcm.blockbrawl.presentation.navigation.specs.IScreenSpec
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
+import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
 
 @Composable
 fun BlockBrawlNavHost(modifier: Modifier = Modifier,
                       navController: NavHostController,
-                      blockBrawlViewModel: BlockBrawlViewModel,
+                      blockBrawlViewModel: IBlockBrawlViewModel,
                       context: Context
 ) {
     NavHost(

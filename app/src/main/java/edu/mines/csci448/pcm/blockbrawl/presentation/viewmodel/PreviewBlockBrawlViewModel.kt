@@ -1,16 +1,15 @@
 package edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlLevel
-import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlRepo
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import java.util.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import java.util.UUID
 
-class BlockBrawlViewModel(private val blockBrawlRepo: BlockBrawlRepo) : ViewModel(),
+class PreviewBlockBrawlViewModel() :
     IBlockBrawlViewModel {
     companion object {
         private const val LOG_TAG = "pcm.BlockBrawlViewModel"
@@ -28,7 +27,7 @@ class BlockBrawlViewModel(private val blockBrawlRepo: BlockBrawlRepo) : ViewMode
         if (title == null) {
             mTitleTextState.value = ""
         } else {
-            mTitleTextState.value = title;
+            mTitleTextState.value = title
         }
     }
 
@@ -45,10 +44,6 @@ class BlockBrawlViewModel(private val blockBrawlRepo: BlockBrawlRepo) : ViewMode
         mSoundFxState.value = state
     }
 
-    private val mUsername = MutableStateFlow("Player")
-    override val username: StateFlow<String>
-        get() = mUsername.asStateFlow()
-
     override fun setMusicState(state: Boolean) {
         Log.d(LOG_TAG, "setMusicState($state)")
         mMusicState.value = state
@@ -59,25 +54,17 @@ class BlockBrawlViewModel(private val blockBrawlRepo: BlockBrawlRepo) : ViewMode
     override val levelListState: StateFlow<List<BlockBrawlLevel>>
         get() = mLevels.asStateFlow()
 
-    private val mCurrentLevelIdState: MutableStateFlow<UUID> = MutableStateFlow(UUID.randomUUID())
+    private val mCurrentLevelIdState: MutableStateFlow<UUID> =
+        MutableStateFlow(UUID.randomUUID())
 
     private val mCurrentLevelState: MutableStateFlow<BlockBrawlLevel?> = MutableStateFlow(null)
 
     override val currentLevelState: StateFlow<BlockBrawlLevel?>
         get() = mCurrentLevelState.asStateFlow()
 
-    init {
-        viewModelScope.launch {
-            blockBrawlRepo.getLevelStats().collect{ levelList ->
-                mLevels.update { levelList }
-            }
-        }
-        viewModelScope.launch {
-            mCurrentLevelIdState
-                .map { uuid -> blockBrawlRepo.getStatsByLevelId(uuid) }
-                .collect { level -> mCurrentLevelState.update { level } }
-        }
-    }
+    private val mUsername = MutableStateFlow("Malcolm")
+    override val username: StateFlow<String>
+        get() = mUsername.asStateFlow()
 
     override fun loadLevelById(uuid: UUID) {
         mCurrentLevelIdState.update { uuid }
@@ -86,12 +73,10 @@ class BlockBrawlViewModel(private val blockBrawlRepo: BlockBrawlRepo) : ViewMode
 
     override fun addLevelStats(blockBrawlLevel: BlockBrawlLevel) {
         Log.d(LOG_TAG, "adding level stats $blockBrawlLevel")
-        blockBrawlRepo.addLevelStats(blockBrawlLevel)
     }
 
     override fun deleteLevelStats(blockBrawlLevel: BlockBrawlLevel) {
         Log.d(LOG_TAG, "deleting level stats $blockBrawlLevel")
-        blockBrawlRepo.deleteLevel(blockBrawlLevel)
     }
 
     override fun setUsername(username: String) {

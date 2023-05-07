@@ -7,6 +7,7 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import edu.mines.csci448.pcm.blockbrawl.presentation.leaderboardlistscreen.DetailedLeaderboardListScreen
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
+import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
 
 object DetailedLeaderboardListSpec : IScreenSpec{
     private const val LOG_TAG = "448.DetailedLeaderboardListSpec"
@@ -19,7 +20,7 @@ object DetailedLeaderboardListSpec : IScreenSpec{
     override fun buildTitle() = title;
     @Composable
     override fun Content(
-        blockBrawlViewModel: BlockBrawlViewModel,
+        blockBrawlViewModel: IBlockBrawlViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry,
         context: Context

@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.*
 import edu.mines.csci448.pcm.blockbrawl.presentation.gamescreen.GameScreen
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
+import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
 
 object GameScreenSpec : IScreenSpec {
     private const val LOG_TAG = "448.GameScreenSpec"
@@ -16,7 +17,7 @@ object GameScreenSpec : IScreenSpec {
     override fun buildTitle() = title;
     @Composable
     override fun Content(
-        blockBrawlViewModel: BlockBrawlViewModel,
+        blockBrawlViewModel: IBlockBrawlViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry,
         context: Context
