@@ -23,7 +23,7 @@ class BlockBrawlViewModel(private val blockBrawlRepo: BlockBrawlRepo) : ViewMode
         get() = mTitleTextState.asStateFlow()
 
 
-    override fun changeTitleText(title: String?) {
+    fun changeTitleText(title: String?) {
         Log.d(LOG_TAG, "changeTitleText($title)")
         if (title == null) {
             mTitleTextState.value = ""
@@ -44,10 +44,6 @@ class BlockBrawlViewModel(private val blockBrawlRepo: BlockBrawlRepo) : ViewMode
         Log.d(LOG_TAG, "setSoundFxState($state)")
         mSoundFxState.value = state
     }
-
-    private val mUsername = MutableStateFlow("Player")
-    override val username: StateFlow<String>
-        get() = mUsername.asStateFlow()
 
     override fun setMusicState(state: Boolean) {
         Log.d(LOG_TAG, "setMusicState($state)")
@@ -84,18 +80,13 @@ class BlockBrawlViewModel(private val blockBrawlRepo: BlockBrawlRepo) : ViewMode
         Log.d(LOG_TAG, "Level not found")
     }
 
-    override fun addLevelStats(blockBrawlLevel: BlockBrawlLevel) {
-        Log.d(LOG_TAG, "adding level stats $blockBrawlLevel")
-        blockBrawlRepo.addLevelStats(blockBrawlLevel)
+    override fun addLevelStats(levelStatsToAdd: BlockBrawlLevel) {
+        Log.d(LOG_TAG, "adding level stats $levelStatsToAdd")
+        blockBrawlRepo.addLevelStats(levelStatsToAdd)
     }
 
-    override fun deleteLevelStats(blockBrawlLevel: BlockBrawlLevel) {
-        Log.d(LOG_TAG, "deleting level stats $blockBrawlLevel")
-        blockBrawlRepo.deleteLevel(blockBrawlLevel)
-    }
-
-    override fun setUsername(username: String) {
-        Log.d(LOG_TAG, "setUsername($username)")
-        mUsername.value = username
+    override fun deleteLevelStats(levelStatsToDelete: BlockBrawlLevel) {
+        Log.d(LOG_TAG, "deleting level stats $levelStatsToDelete")
+        blockBrawlRepo.deleteLevel(levelStatsToDelete)
     }
 }

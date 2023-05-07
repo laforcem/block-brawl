@@ -20,19 +20,6 @@ class Block(
         //' ' represents empty space that is not part of the block.
     val shape: Array<Array<Char>>,
     val color: Color,
-    val canvasWidth: Float,
-    val canvasHeight: Float,
-    val gameboard_size: Int
-    ) {
-    val WIDTH = canvasWidth / gameboard_size
-
-fun DrawScope.drawBlock(block: Block, offsetX: Float, offsetY: Float){
-    drawRect(
-        color = block.color,
-        size = Size(width = block.WIDTH, height = block.WIDTH),
-        topLeft = Offset(block.x_pos + offsetX, block.y_pos + offsetY),
-    )
-}
 
     //If the block is placed on the board or not.
     var isPlaced: Boolean) {
