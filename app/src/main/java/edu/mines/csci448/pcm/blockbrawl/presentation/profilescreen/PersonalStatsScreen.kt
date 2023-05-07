@@ -17,6 +17,7 @@ import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlRepo
 import edu.mines.csci448.pcm.blockbrawl.presentation.settings.SettingsScreen
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
+import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.PreviewBlockBrawlViewModel
 
 @Composable
 fun PersonalStatsScreen(
@@ -41,8 +42,5 @@ fun PersonalStatsScreen(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewPersonalStatsScreen(){
-    val context = LocalContext.current
-    val repo = BlockBrawlRepo.getInstance(context)
-    val viewModel = BlockBrawlViewModel(repo)
-    PersonalStatsScreen(viewModel) {}
+    PersonalStatsScreen(PreviewBlockBrawlViewModel()) {}
 }

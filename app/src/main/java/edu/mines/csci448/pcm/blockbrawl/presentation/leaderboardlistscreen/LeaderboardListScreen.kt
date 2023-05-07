@@ -1,23 +1,17 @@
 package edu.mines.csci448.pcm.blockbrawl.presentation.leaderboardlistscreen
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import edu.mines.csci448.pcm.blockbrawl.R
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
+import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.PreviewBlockBrawlViewModel
 
 @Composable
 fun LeaderboardListScreen(
@@ -48,9 +42,9 @@ fun LeaderboardListScreen(
     }
 }
 
-/*
-@Preview
+
+@Preview(showBackground = true)
 @Composable
-private fun PreviewLeaderboardListScreen(){
-    LeaderboardListScreen(blockBrawlViewModel = BlockBrawlViewModel(), {}, {})
-}*/
+private fun PreviewLeaderboardListScreen() {
+    LeaderboardListScreen(blockBrawlViewModel = PreviewBlockBrawlViewModel(), {}, {})
+}
