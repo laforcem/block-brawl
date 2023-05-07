@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlLevel
 import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlRepo
+import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlUser
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.*
@@ -45,7 +46,7 @@ class BlockBrawlViewModel(private val blockBrawlRepo: BlockBrawlRepo) : ViewMode
         mSoundFxState.value = state
     }
 
-    private val mUsername = MutableStateFlow("Player")
+    private val mUsername = MutableStateFlow("User")
     override val username: StateFlow<String>
         get() = mUsername.asStateFlow()
 
@@ -72,6 +73,7 @@ class BlockBrawlViewModel(private val blockBrawlRepo: BlockBrawlRepo) : ViewMode
                 mLevels.update { levelList }
             }
         }
+
         viewModelScope.launch {
             mCurrentLevelIdState
                 .map { uuid -> blockBrawlRepo.getStatsByLevelId(uuid) }
@@ -97,5 +99,28 @@ class BlockBrawlViewModel(private val blockBrawlRepo: BlockBrawlRepo) : ViewMode
     override fun setUsername(username: String) {
         Log.d(LOG_TAG, "setUsername($username)")
         mUsername.value = username
+    }
+
+    override fun getStatsByLevelNumber(levelNumber: Int) {
+        Log.d(LOG_TAG, "fetching level stats for level $levelNumber")
+        viewModelScope.launch {
+            blockBrawlRepo.getStatsByLevelNumber(levelNumber).collect{ levelList ->
+                mLevels.update { levelList }
+            }
+        }
+    }
+
+    override fun getBestLevelStats(levelNumber: Int) {
+        Log.d(LOG_TAG, "fetching best level stats for user $username")
+        viewModelScope.launch {
+            blockBrawlRepo.getBestLevelStats(username.value, levelNumber).collect{ levelList ->
+                if(levelList.isNotEmpty()) {
+                    mLevels.update { levelList }
+                }
+                else {
+                    mLevels.update { emptyList() }
+                }
+            }
+        }
     }
 }

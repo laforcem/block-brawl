@@ -20,4 +20,6 @@ interface IBlockBrawlViewModel {
     fun setMusicState(state: Boolean)
     fun changeTitleText(title: String?)
     fun setUsername(username: String)
+    fun getStatsByLevelNumber(levelNumber: Int)
+    fun getBestLevelStats(levelNumber: Int)
 }
