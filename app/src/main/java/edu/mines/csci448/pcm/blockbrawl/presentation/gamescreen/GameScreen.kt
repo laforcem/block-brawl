@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.input.pointer.pointerInput
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
+import kotlin.math.abs
 
 @Composable
 fun GameScreen(
@@ -29,13 +30,13 @@ fun GameScreen(
     val shadowOffsetY: MutableState<Float> = remember { mutableStateOf(0f)}
     val blockBeingDragged: MutableState<Block?> = remember { mutableStateOf(null) }
     val validPlacement: MutableState<Boolean> = remember { mutableStateOf(false)}
-    val boardWidth = 8
-    val boardHeight = 5
+    val boardWidth = 7
+    val boardHeight = 4
 
         // This is just a temporary test block
         val block1 = Block(
-            100f,
-            50f,
+            150f,
+            80f,
             arrayOf(
                 arrayOf('C'),
                 arrayOf('X')
@@ -45,8 +46,8 @@ fun GameScreen(
         )
 
         val block2 = Block(
-            230f,
-            50f,
+            460f,
+            80f,
             arrayOf(
                 arrayOf('X', 'C'),
                 arrayOf(' ', 'X')
@@ -57,22 +58,45 @@ fun GameScreen(
 
         val block3 = Block(
             470f,
-            50f,
+            1430f,
             arrayOf(
-                arrayOf('X', 'X', 'X'),
-                arrayOf('X', 'C', 'X'),
-                arrayOf('X', 'X', 'X')
+                arrayOf('X', 'X', ' ', ' '),
+                arrayOf(' ', 'C', 'X', ' '),
+                arrayOf(' ', ' ', 'X', 'X')
             ),
             Color(0xFF1d7dde),
             false
         )
 
+        val block4 = Block(
+            170f,
+            1430f,
+            arrayOf(
+                arrayOf(' ', 'X', ' '),
+                arrayOf(' ', 'C', ' '),
+                arrayOf('X', 'X', ' '),
+                arrayOf('X', ' ', ' ')
+            ),
+            Color(0xFFdbbd27),
+            false
+        )
 
+        val block5 = Block(
+            700f,
+            80f,
+            arrayOf(
+                arrayOf('C', 'X'),
+                arrayOf('X', 'X'),
+            ),
+            Color(0xFFed5a32),
+            false
+        )
 
     //TODO: set up a list of blocks in the ViewModel.
     // for now the list is defined here.
-    val currentBlockListState: MutableState<List<Block>> = remember { mutableStateOf(listOf(block1, block2, block3)) }
+    val currentBlockListState: MutableState<List<Block>> = remember { mutableStateOf(listOf(block1, block2, block3, block4, block5)) }
     val gameBoardState: MutableState<Array<Array<Char>>> = remember { mutableStateOf(Array(boardHeight) {Array(boardWidth) {' '} }) }
+    val gameBoardTempState: MutableState<Array<Array<Char>>> = remember { mutableStateOf(Array(boardHeight) {Array(boardWidth) {' '} }) }
 
     BoxWithConstraints(
         modifier = Modifier
@@ -82,7 +106,7 @@ fun GameScreen(
         val canvasHeight = LocalDensity.current.run { maxHeight.toPx()}
         val WIDTH = canvasWidth / (boardWidth + 1)
         val boardTopLeft_x = WIDTH/2
-        val boardTopLeft_y = canvasHeight - (WIDTH)*boardHeight - WIDTH/2
+        val boardTopLeft_y = (canvasHeight - (WIDTH)*boardHeight - WIDTH/2)/2
 
         //Game content goes here
         Canvas(modifier = Modifier.fillMaxSize().pointerInput(Unit) {
@@ -90,16 +114,22 @@ fun GameScreen(
                 onDragStart = {   //When the player taps anywhere on the canvas.
                     //Find tapped block
                     blockBeingDragged.value = getTappedBlock(it, WIDTH, currentBlockListState.value);
+                    if (blockBeingDragged.value != null){
+                        if (blockBeingDragged.value!!.isPlaced){
+                            gameBoardState.value = erasePlacement(blockBeingDragged.value!!, offsetX.value, offsetY.value, WIDTH, boardTopLeft_x, boardTopLeft_y, boardWidth, boardHeight, gameBoardState.value)
+                        }
+                    }
                 },
                 onDragEnd = {   //When the player lets go of the block.
                     if (validPlacement.value && blockBeingDragged.value != null){
                         // If there is a valid spot for the block, change the block's position to that spot.
                         blockBeingDragged.value!!.x_pos = shadowOffsetX.value
                         blockBeingDragged.value!!.y_pos = shadowOffsetY.value
+                        gameBoardState.value = gameBoardTempState.value
                         blockBeingDragged.value!!.isPlaced = true
                         validPlacement.value = false
                     }
-                    else{
+                    else if (blockBeingDragged.value != null){
                         //If there is no valid spot, put the block back where it started
                         blockBeingDragged.value!!.x_pos = blockBeingDragged.value!!.init_x_pos
                         blockBeingDragged.value!!.y_pos = blockBeingDragged.value!!.init_y_pos
@@ -116,12 +146,21 @@ fun GameScreen(
                     change.consume()
                     offsetX.value += dragAmount.x
                     offsetY.value += dragAmount.y
-                    val point: Pair<Float, Float>? = isPlacementValid(blockBeingDragged.value!!, offsetX.value, offsetY.value, WIDTH, boardTopLeft_x, boardTopLeft_y, boardWidth, boardHeight)
-                    if (point != null){
-                        shadowOffsetX.value = point.first
-                        shadowOffsetY.value = point.second
-                        validPlacement.value = true
-                    }
+                        val data: Pair<Pair<Float, Float>, Array<Array<Char>>>? = isPlacementValid(blockBeingDragged.value!!, offsetX.value, offsetY.value, WIDTH, boardTopLeft_x, boardTopLeft_y, boardWidth, boardHeight, gameBoardState.value)
+                        if (data != null){
+                            shadowOffsetX.value = data.first.first
+                            shadowOffsetY.value = data.first.second
+                            gameBoardTempState.value = data.second
+                            validPlacement.value = true
+                        }
+                        else{
+                            //Get rid of shadow after going out of range
+                            if (abs(shadowOffsetX.value - (offsetX.value + blockBeingDragged.value!!.x_pos)) > WIDTH*3
+                                || abs(shadowOffsetY.value - (offsetY.value + blockBeingDragged.value!!.y_pos)) > WIDTH*3 ){
+                                validPlacement.value = false
+                            }
+                        }
+
                 }
             }
         })
@@ -130,6 +169,13 @@ fun GameScreen(
             // Display the entire game.
             */
 
+
+            //Draw game board outline
+            drawRect(
+                color = Color.Black,
+                size = Size(width = (WIDTH)*boardWidth + 12, height = (WIDTH)*(boardHeight) + 12),
+                topLeft = Offset(boardTopLeft_x - 6, boardTopLeft_y - 6),
+            )
             //Draw game board
             drawRect(
                 color = Color(0xFFdfdfdf),
@@ -151,8 +197,8 @@ fun GameScreen(
                         //Draw the shadow of the valid placement for the dragged block on the game board
                         drawRect(
                             color = Color.Gray,
-                            size = Size(width = WIDTH, height = WIDTH),
-                            topLeft = Offset(shadowOffsetX.value + square.x*WIDTH, shadowOffsetY.value + square.y*WIDTH),
+                            size = Size(width = WIDTH + 2, height = WIDTH + 2),
+                            topLeft = Offset(shadowOffsetX.value + square.x*WIDTH - 1, shadowOffsetY.value + square.y*WIDTH - 1),
                         )
                     }
                 }
@@ -160,16 +206,56 @@ fun GameScreen(
                 drawBlock(blockBeingDragged.value!!, offsetX.value, offsetY.value, WIDTH);
             }
         }
-
     }
 }
 
-// Determine if the current spot being hovered over is a valid spot.
-fun isPlacementValid(block: Block, offsetX: Float, offsetY: Float, width: Float, gameBoard_x: Float, gameBoard_y: Float, boardWidth: Int, boardHeight: Int): Pair<Float, Float>?{
+//When a block that has already been placed on the board is dragged, erase its position from the game board.
+fun erasePlacement(block: Block, offsetX: Float, offsetY: Float, width: Float, gameBoard_x: Float, gameBoard_y: Float, boardWidth: Int, boardHeight: Int, gameBoardState: Array<Array<Char>>): Array<Array<Char>>{
     var block_x = block.x_pos + offsetX
     var block_y = block.y_pos + offsetY
 
-    // Check if the block is in the range of the gameboard
+    var gameBoard: Array<Array<Char>> = Array(boardHeight) {Array(boardWidth) {' '} }
+
+    gameBoard.forEachIndexed {i, row ->
+        row.forEachIndexed {j, char ->
+            gameBoard[i][j] = gameBoardState[i][j]
+        }
+    }
+
+    // Check if the block's center is in the range of the gameboard
+    if (block_x >= gameBoard_x && block_y >= gameBoard_y && block_x < gameBoard_x + boardWidth*width && block_y < gameBoard_y + boardHeight*width){
+        block_x -= gameBoard_x - width/2
+        block_y -= gameBoard_y - width/2
+        val nearest_x_coord = (block_x / width).toInt()
+        val nearest_y_coord = (block_y / width).toInt()
+
+        //Check if the block can actually fit in that spot
+        block.squares.forEach { square ->
+            val square_x_coord = nearest_x_coord + square.x
+            val square_y_coord = nearest_y_coord + square.y
+
+            gameBoard[square_y_coord][square_x_coord] = ' '
+        }
+    }
+
+    return gameBoard;
+}
+
+
+    // Determine if the current spot being hovered over is a valid spot. Return the coordinates of that spot, if it exists. Also return the new game board state.
+fun isPlacementValid(block: Block, offsetX: Float, offsetY: Float, width: Float, gameBoard_x: Float, gameBoard_y: Float, boardWidth: Int, boardHeight: Int, gameBoardState: Array<Array<Char>>): Pair<Pair<Float, Float>, Array<Array<Char>>>?{
+    var block_x = block.x_pos + offsetX
+    var block_y = block.y_pos + offsetY
+
+    var gameBoard: Array<Array<Char>> = Array(boardHeight) {Array(boardWidth) {' '} }
+
+    gameBoard.forEachIndexed {i, row ->
+        row.forEachIndexed {j, char ->
+            gameBoard[i][j] = gameBoardState[i][j]
+        }
+    }
+
+    // Check if the block's center is in the range of the gameboard
     if (block_x >= gameBoard_x && block_y >= gameBoard_y && block_x < gameBoard_x + boardWidth*width && block_y < gameBoard_y + boardHeight*width){
         block_x -= gameBoard_x - width/2
         block_y -= gameBoard_y - width/2
@@ -177,19 +263,25 @@ fun isPlacementValid(block: Block, offsetX: Float, offsetY: Float, width: Float,
         val nearest_y_coord = (block_y / width).toInt()
         val nearest_x = nearest_x_coord * width
         val nearest_y = nearest_y_coord * width
+
+        //Check if the block can actually fit in that spot
         block.squares.forEach { square ->
-            val max_y = block.shape.size
-            val max_x = block.shape[0].size
-            val shape_x = square.x + block.center_x
-            val shape_y = square.y + block.center_y
-
-
-
+            val square_x_coord = nearest_x_coord + square.x
+            val square_y_coord = nearest_y_coord + square.y
+            //Check if this particular square is in range of the board
+            if (square_x_coord >= 0 && square_x_coord < boardWidth && square_y_coord >= 0 && square_y_coord < boardHeight) {
+                //Check if the spot is already taken
+                if (gameBoard[square_y_coord][square_x_coord] != ' '){
+                    return null
+                }
+                gameBoard[square_y_coord][square_x_coord] = 'X'
+            }
+            else{
+                return null
+            }
         }
-        return Pair(gameBoard_x + nearest_x, gameBoard_y + nearest_y);
+        return Pair(Pair(gameBoard_x + nearest_x, gameBoard_y + nearest_y), gameBoard)
     }
-
-
     return null;
 }
 
@@ -211,22 +303,18 @@ fun getTappedBlock(offset: Offset, width: Float, blockList: List<Block>): Block?
 fun DrawScope.drawBlock(block: Block, offsetX: Float, offsetY: Float, width: Float){
     block.squares.forEach { square ->
         //Draw the outline
-
         drawRect(
             color = Color.Black,
             size = Size(width = width + 2, height = width + 2),
             topLeft = Offset(block.x_pos + offsetX + square.x*width - 1, block.y_pos + offsetY + square.y*width - 1),
         )
-        //Draw the block
 
+        //Draw the block
         drawRect(
             color = block.color,
             size = Size(width = width - 12, height = width - 12),
             topLeft = Offset(block.x_pos + offsetX + square.x*width + 6, block.y_pos + offsetY + square.y*width + 6),
         )
-
-
-
 
         //
         // Fill in spots where outlines shouldn't be
@@ -237,7 +325,7 @@ fun DrawScope.drawBlock(block: Block, offsetX: Float, offsetY: Float, width: Flo
         val shape_y = square.y + block.center_y
 
         //
-        // Check sides
+        // Fill sides
         //
         // top
 
@@ -283,7 +371,7 @@ fun DrawScope.drawBlock(block: Block, offsetX: Float, offsetY: Float, width: Flo
 
 
         //
-        //Check corners
+        //Fill corners
         //
 
         //bottom right

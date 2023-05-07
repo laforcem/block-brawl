@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 
 class Block(
-    //Current coordinates of the block
+    //Current coordinates of the block (when it is still, not when it is being dragged)
     var x_pos: Float,
     var y_pos: Float,
 
