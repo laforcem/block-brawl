@@ -3,7 +3,6 @@ package edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel
 import android.util.Log
 import androidx.navigation.NavHostController
 import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlLevel
-import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlRepo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -28,7 +27,7 @@ class PreviewBlockBrawlViewModel() :
         if (title == null) {
             mTitleTextState.value = ""
         } else {
-            mTitleTextState.value = title;
+            mTitleTextState.value = title
         }
     }
 
@@ -63,16 +62,25 @@ class PreviewBlockBrawlViewModel() :
     override val currentLevelState: StateFlow<BlockBrawlLevel?>
         get() = mCurrentLevelState.asStateFlow()
 
+    private val mUsername = MutableStateFlow("Malcolm")
+    override val username: StateFlow<String>
+        get() = mUsername.asStateFlow()
+
     override fun loadLevelById(uuid: UUID) {
         mCurrentLevelIdState.update { uuid }
         Log.d(LOG_TAG, "Level not found")
     }
 
-    override fun addLevelStats(levelStatsToAdd: BlockBrawlLevel) {
-        Log.d(LOG_TAG, "adding level stats $levelStatsToAdd")
+    override fun addLevelStats(blockBrawlLevel: BlockBrawlLevel) {
+        Log.d(LOG_TAG, "adding level stats $blockBrawlLevel")
     }
 
-    override fun deleteLevelStats(levelStatsToDelete: BlockBrawlLevel) {
-        Log.d(LOG_TAG, "deleting level stats $levelStatsToDelete")
+    override fun deleteLevelStats(blockBrawlLevel: BlockBrawlLevel) {
+        Log.d(LOG_TAG, "deleting level stats $blockBrawlLevel")
+    }
+
+    override fun setUsername(username: String) {
+        Log.d(LOG_TAG, "setUsername($username)")
+        mUsername.value = username
     }
 }

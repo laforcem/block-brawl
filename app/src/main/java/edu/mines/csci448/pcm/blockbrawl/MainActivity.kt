@@ -1,23 +1,28 @@
 package edu.mines.csci448.pcm.blockbrawl
 
+import android.app.LocalActivityManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
 import edu.mines.csci448.pcm.blockbrawl.presentation.navigation.BlockBrawlNavHost
 import edu.mines.csci448.pcm.blockbrawl.presentation.navigation.BlockBrawlTopBar
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModelFactory
+import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
 import edu.mines.csci448.pcm.blockbrawl.ui.theme.BlockBrawlTheme
 
 class MainActivity : ComponentActivity() {
 
-    private lateinit var mBlockBrawlViewModel: BlockBrawlViewModel
+    private lateinit var mBlockBrawlViewModel: IBlockBrawlViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +36,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val navController = rememberNavController()
-            mBlockBrawlViewModel.navController = navController
+            (mBlockBrawlViewModel as BlockBrawlViewModel).navController = navController
             val context = LocalContext.current
 
             BlockBrawlTheme {
