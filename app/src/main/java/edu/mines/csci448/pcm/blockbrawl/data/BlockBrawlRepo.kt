@@ -11,19 +11,15 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 class BlockBrawlRepo @OptIn(DelicateCoroutinesApi::class)
-private constructor(
-    private val blockBrawlDao: BlockBrawlDao,
-    private val coroutineScope: CoroutineScope = GlobalScope
-) {
+private constructor(private val blockBrawlDao: BlockBrawlDao, private val coroutineScope: CoroutineScope = GlobalScope) {
     companion object {
         private const val LOG_TAG = "448.BlockBrawl"
-        @Volatile
-        private var INSTANCE: BlockBrawlRepo? = null
+        @Volatile private var INSTANCE: BlockBrawlRepo? = null
 
         fun getInstance(context: Context): BlockBrawlRepo {
             synchronized(this) {
                 var instance = INSTANCE
-                if (instance == null) {
+                if(instance == null) {
                     val database = BlockBrawlDatabase.getInstance(context)
                     instance = BlockBrawlRepo(database.blockBrawlDao)
                     INSTANCE = instance
@@ -38,7 +34,6 @@ private constructor(
             blockBrawlDao.addLevelStats(level)
         }
     }
-
     fun getLevelStats(): Flow<List<BlockBrawlLevel>> = blockBrawlDao.getLevelStats()
     suspend fun getStatsByLevelId(id: UUID): BlockBrawlLevel? = blockBrawlDao.getStatsByLevelId(id)
     fun deleteLevel(level: BlockBrawlLevel) {

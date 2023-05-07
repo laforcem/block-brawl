@@ -27,7 +27,6 @@ import edu.mines.csci448.pcm.blockbrawl.R
 import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlRepo
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
-import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.PreviewBlockBrawlViewModel
 
 @Composable
 fun SettingsScreen(blockBrawlViewModel: IBlockBrawlViewModel) {
@@ -89,5 +88,8 @@ fun SettingsScreen(blockBrawlViewModel: IBlockBrawlViewModel) {
 @Preview(showBackground = true)
 @Composable
 fun SettingsScreenPreview(){
-    SettingsScreen(PreviewBlockBrawlViewModel())
+    val context = LocalContext.current
+    val repo = BlockBrawlRepo.getInstance(context)
+    val viewModel = BlockBrawlViewModel(repo)
+    SettingsScreen(viewModel)
 }

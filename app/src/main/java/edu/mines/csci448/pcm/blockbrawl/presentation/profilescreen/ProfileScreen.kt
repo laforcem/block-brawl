@@ -1,66 +1,45 @@
 package edu.mines.csci448.pcm.blockbrawl.presentation.profilescreen
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
+import android.graphics.drawable.shapes.Shape
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.List
-import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import edu.mines.csci448.pcm.blockbrawl.R
-import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
-import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.PreviewBlockBrawlViewModel
 
 @Composable
 fun ProfileScreen(
-    onStatsClicked: () -> Unit,
-    blockBrawlViewModel: IBlockBrawlViewModel
+    onStatsClicked: () -> Unit
 ) {
-    var isEditing by remember { mutableStateOf(false) }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        Box(
-            modifier = Modifier
-                .wrapContentHeight(Alignment.CenterVertically)
-                .fillMaxSize()
-                .weight(0.2f),
-            contentAlignment = Alignment.Center
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Row(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
+                modifier = Modifier.width(325.dp),
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -68,69 +47,46 @@ fun ProfileScreen(
                     imageVector = Icons.Filled.AccountCircle,
                     contentDescription = stringResource(R.string.menu_profile_desc),
                     modifier = Modifier
-                        .size(100.dp),
+                        .padding(12.dp)
+                        .size(100.dp)
                 )
-                if (isEditing) {
-                    TextField(
-                        value = blockBrawlViewModel.username.collectAsState().value,
-                        onValueChange = { blockBrawlViewModel.setUsername(it) },
-                        label = { Text(stringResource(R.string.edit_name_dialog_title)) },
-                        singleLine = true,
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            imeAction = ImeAction.Done
-                        ),
-                        keyboardActions = KeyboardActions(
-                            onDone = {
-                                isEditing = false
-                            }
-                        ),
-                    )
-                } else {
-                    Button(
-                        onClick = {
-                            isEditing = true
-                        },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight(0.5f)
-                    ) {
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.Start,
+                    modifier = Modifier.fillMaxWidth(0.5f)
+                ) {
+                    Button(onClick = { /*TODO*/ }) {
                         Row(
                             horizontalArrangement = Arrangement.SpaceBetween,
-                            modifier = Modifier.weight(1f),
-                            verticalAlignment = Alignment.CenterVertically
+                            modifier = Modifier.weight(1f)
                         ) {
-                            Text(
-                                text = blockBrawlViewModel.username.collectAsState().value,
-                                fontSize = 18.sp
-                            )
+                            Text(text = "You")
                             Icon(
                                 imageVector = Icons.Filled.Edit,
-                                contentDescription = stringResource(id = R.string.edit_name_dialog_title),
+                                contentDescription = stringResource(id = R.string.profile_screen_edit_name_desc),
                             )
                         }
                     }
+                    Text(text = "you@mines.edu")
                 }
             }
         }
         Box(
             contentAlignment = Alignment.TopCenter,
             modifier = Modifier
-                .fillMaxSize()
-                .weight(0.8f)
+                .fillMaxWidth()
         ) {
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
+                modifier = Modifier.width(325.dp),
             ) {
                 Button(
                     onClick = { onStatsClicked() },
                     modifier = Modifier
                         .fillMaxWidth()
+                        .padding(8.dp)
                 ) {
                     Row(
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                        horizontalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Filled.List,
@@ -149,5 +105,5 @@ fun ProfileScreen(
 @Preview(showBackground = true)
 @Composable
 fun ProfileScreenPreview() {
-    ProfileScreen(onStatsClicked = {}, blockBrawlViewModel = PreviewBlockBrawlViewModel())
+    //ProfileScreen {}
 }

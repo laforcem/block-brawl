@@ -20,7 +20,6 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
 import edu.mines.csci448.pcm.blockbrawl.R
-import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
 
 sealed interface IScreenSpec {
     companion object {
@@ -36,7 +35,7 @@ sealed interface IScreenSpec {
 
         @Composable
         public fun TopBar(
-            blockBrawlViewModel: IBlockBrawlViewModel,
+            blockBrawlViewModel: BlockBrawlViewModel,
             navController: NavHostController,
             navBackStackEntry: NavBackStackEntry?,
             context: Context
@@ -58,7 +57,7 @@ sealed interface IScreenSpec {
 
     @Composable
     fun Content(
-        blockBrawlViewModel: IBlockBrawlViewModel,
+        blockBrawlViewModel: BlockBrawlViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry,
         context: Context
@@ -68,7 +67,7 @@ sealed interface IScreenSpec {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     private fun TopAppBarContent(
-        blockBrawlViewModel: IBlockBrawlViewModel,
+        blockBrawlViewModel: BlockBrawlViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry?,
         context: Context
@@ -104,7 +103,7 @@ sealed interface IScreenSpec {
 
     @Composable
     fun TopAppBarActions(
-        blockBrawlViewModel: IBlockBrawlViewModel,
+        blockBrawlViewModel: BlockBrawlViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry?,
         context: Context
