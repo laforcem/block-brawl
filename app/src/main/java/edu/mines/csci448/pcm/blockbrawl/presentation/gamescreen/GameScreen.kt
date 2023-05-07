@@ -44,7 +44,7 @@ fun GameScreen(
     /*
     // Defining game variables
     */
-    val timer: MutableState<Float> = remember {mutableStateOf(45.00f)}   //Set a 45 second timer
+    val timer: MutableState<Float> = remember {mutableStateOf(60.00f)}   //Set a 45 second timer
     val gameOver: MutableState<Boolean> = remember { mutableStateOf(false) }
     val textMeasurer = rememberTextMeasurer()
     val score = remember { mutableStateOf(0) }
@@ -113,35 +113,39 @@ fun GameScreen(
                 // Called when the player taps anywhere on the canvas.
                 onDragStart = {
                     //Find tapped block
-                    blockBeingDragged.value = getTappedBlock(it, WIDTH, currentBlockListState.value);
-                    if (blockBeingDragged.value != null){
-                        if (blockBeingDragged.value!!.isPlaced){
-                            gameBoardState.value = erasePlacement(blockBeingDragged.value!!, offsetX.value, offsetY.value, WIDTH, boardTopLeft_x, boardTopLeft_y, boardWidth, boardHeight, gameBoardState.value)
+                    if (!gameOver.value){
+                        blockBeingDragged.value = getTappedBlock(it, WIDTH, currentBlockListState.value);
+                        if (blockBeingDragged.value != null){
+                            if (blockBeingDragged.value!!.isPlaced){
+                                gameBoardState.value = erasePlacement(blockBeingDragged.value!!, offsetX.value, offsetY.value, WIDTH, boardTopLeft_x, boardTopLeft_y, boardWidth, boardHeight, gameBoardState.value)
+                            }
                         }
                     }
                 },
                 // Called when the player lets go after dragging
                 onDragEnd = {
-                    if (validPlacement.value && blockBeingDragged.value != null){
-                        // If there is a valid spot for the block, change the block's position to that spot.
-                        blockBeingDragged.value!!.x_pos = shadowOffsetX.value
-                        blockBeingDragged.value!!.y_pos = shadowOffsetY.value
-                        gameBoardState.value = gameBoardTempState.value
-                        blockBeingDragged.value!!.isPlaced = true
-                        validPlacement.value = false
+                    if (!gameOver.value){
+                        if (validPlacement.value && blockBeingDragged.value != null){
+                            // If there is a valid spot for the block, change the block's position to that spot.
+                            blockBeingDragged.value!!.x_pos = shadowOffsetX.value
+                            blockBeingDragged.value!!.y_pos = shadowOffsetY.value
+                            gameBoardState.value = gameBoardTempState.value
+                            blockBeingDragged.value!!.isPlaced = true
+                            validPlacement.value = false
+                        }
+                        else if (blockBeingDragged.value != null){
+                            //If there is no valid spot, put the block back where it started
+                            blockBeingDragged.value!!.x_pos = blockBeingDragged.value!!.init_x_pos
+                            blockBeingDragged.value!!.y_pos = blockBeingDragged.value!!.init_y_pos
+                            blockBeingDragged.value!!.isPlaced = false
+                            validPlacement.value = false
+                        }
+                        score.value = calculateScore(currentBlockListState.value)
+                        //Reset variables
+                        blockBeingDragged.value = null
+                        offsetX.value = 0f;
+                        offsetY.value = 0f;
                     }
-                    else if (blockBeingDragged.value != null){
-                        //If there is no valid spot, put the block back where it started
-                        blockBeingDragged.value!!.x_pos = blockBeingDragged.value!!.init_x_pos
-                        blockBeingDragged.value!!.y_pos = blockBeingDragged.value!!.init_y_pos
-                        blockBeingDragged.value!!.isPlaced = false
-                        validPlacement.value = false
-                    }
-                    score.value = calculateScore(currentBlockListState.value)
-                    //Reset variables
-                    blockBeingDragged.value = null
-                    offsetX.value = 0f;
-                    offsetY.value = 0f;
                 })
             // Called everytime the position of the block changes while it is being dragged
             { change, dragAmount ->
