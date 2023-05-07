@@ -36,20 +36,6 @@ fun PersonalStatsScreen(
         modifier = Modifier
             .fillMaxWidth()
     ) {
-        Button(
-            onClick = {
-                blockBrawlViewModel.addLevelStats(
-                    BlockBrawlLevel(
-                        userName = "Paco",
-                        levelNumber = 2,
-                        completed = true,
-                        score = 20
-                    )
-                )
-            }
-        ) {
-
-        }
         //List of Levels in the game
         LazyColumn(
             modifier = Modifier
