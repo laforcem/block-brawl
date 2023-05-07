@@ -11,10 +11,13 @@ interface IBlockBrawlViewModel {
     val titleTextState: StateFlow<String>
     val levelListState: StateFlow<List<BlockBrawlLevel>>
     val currentLevelState: StateFlow<BlockBrawlLevel?>
+    val username: StateFlow<String>
 
     fun loadLevelById(uuid: UUID)
     fun addLevelStats(blockBrawlLevel: BlockBrawlLevel)
     fun deleteLevelStats(blockBrawlLevel: BlockBrawlLevel)
     fun setSoundFxState(state: Boolean)
     fun setMusicState(state: Boolean)
+    fun changeTitleText(title: String?)
+    fun setUsername(username: String)
 }
