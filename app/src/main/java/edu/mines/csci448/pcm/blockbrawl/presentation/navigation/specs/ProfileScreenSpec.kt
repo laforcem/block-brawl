@@ -18,6 +18,7 @@ import androidx.navigation.NavHostController
 import edu.mines.csci448.pcm.blockbrawl.R
 import edu.mines.csci448.pcm.blockbrawl.presentation.profilescreen.ProfileScreen
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
+import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
 
 object ProfileScreenSpec : IScreenSpec {
     private const val LOG_TAG = "448.ProfileScreenSpec"
@@ -29,7 +30,7 @@ object ProfileScreenSpec : IScreenSpec {
     override fun buildTitle() = title;
     @Composable
     override fun Content(
-        blockBrawlViewModel: BlockBrawlViewModel,
+        blockBrawlViewModel: IBlockBrawlViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry,
         context: Context
@@ -39,7 +40,7 @@ object ProfileScreenSpec : IScreenSpec {
 
     @Composable
     override fun TopAppBarActions(
-        blockBrawlViewModel: BlockBrawlViewModel,
+        blockBrawlViewModel: IBlockBrawlViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry?,
         context: Context

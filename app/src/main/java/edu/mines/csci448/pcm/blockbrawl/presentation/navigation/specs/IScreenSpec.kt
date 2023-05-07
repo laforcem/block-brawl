@@ -58,7 +58,7 @@ sealed interface IScreenSpec {
 
     @Composable
     fun Content(
-        blockBrawlViewModel: BlockBrawlViewModel,
+        blockBrawlViewModel: IBlockBrawlViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry,
         context: Context

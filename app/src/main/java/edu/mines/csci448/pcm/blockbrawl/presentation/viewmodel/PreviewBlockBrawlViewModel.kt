@@ -23,7 +23,7 @@ class PreviewBlockBrawlViewModel() :
         get() = mTitleTextState.asStateFlow()
 
 
-    fun changeTitleText(title: String?) {
+    override fun changeTitleText(title: String?) {
         Log.d(LOG_TAG, "changeTitleText($title)")
         if (title == null) {
             mTitleTextState.value = ""

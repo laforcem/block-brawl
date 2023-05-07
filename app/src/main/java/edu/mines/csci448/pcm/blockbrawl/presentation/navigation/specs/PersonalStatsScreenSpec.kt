@@ -7,6 +7,7 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import edu.mines.csci448.pcm.blockbrawl.presentation.profilescreen.PersonalStatsScreen
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.BlockBrawlViewModel
+import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
 
 object PersonalStatsScreenSpec : IScreenSpec{
     private const val LOG_TAG = "448.PersonalStatsScreenSpec"
@@ -18,7 +19,7 @@ object PersonalStatsScreenSpec : IScreenSpec{
     override fun buildTitle() = title;
     @Composable
     override fun Content(
-        blockBrawlViewModel: BlockBrawlViewModel,
+        blockBrawlViewModel: IBlockBrawlViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry,
         context: Context
