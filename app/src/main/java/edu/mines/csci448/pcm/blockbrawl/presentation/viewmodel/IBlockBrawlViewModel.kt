@@ -17,4 +17,5 @@ interface IBlockBrawlViewModel {
     fun deleteLevelStats(blockBrawlLevel: BlockBrawlLevel)
     fun setSoundFxState(state: Boolean)
     fun setMusicState(state: Boolean)
+    fun changeTitleText(title: String?)
 }
