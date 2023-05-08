@@ -36,11 +36,6 @@ fun PersonalStatsScreen(
         modifier = Modifier
             .fillMaxWidth()
     ) {
-        Button(
-            onClick = { onLevelStatsClicked(1) }
-        ){
-
-        }
         //List of Levels in the game
         LazyColumn(
             modifier = Modifier
