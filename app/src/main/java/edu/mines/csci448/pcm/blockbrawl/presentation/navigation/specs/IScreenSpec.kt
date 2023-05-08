@@ -76,7 +76,7 @@ sealed interface IScreenSpec {
         CenterAlignedTopAppBar(navigationIcon = if (navController.previousBackStackEntry != null) {
             {
 
-                IconButton(onClick = {blockBrawlViewModel.changeTitleText(navController.previousBackStackEntry?.destination?.route); navController.navigateUp(); }) {
+                IconButton(onClick = {blockBrawlViewModel.changeTitleText(navController.previousBackStackEntry?.destination?.route); navController.navigateUp(); blockBrawlViewModel.musicPlayer.stop() }) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
                         contentDescription = stringResource(R.string.app_bar_back_desc)

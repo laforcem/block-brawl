@@ -1,9 +1,11 @@
 package edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel
 
+import android.media.MediaPlayer
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
+import edu.mines.csci448.pcm.blockbrawl.R
 import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlLevel
 import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlRepo
 import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlUser
@@ -17,6 +19,8 @@ class BlockBrawlViewModel(private val blockBrawlRepo: BlockBrawlRepo) : ViewMode
     companion object {
         private const val LOG_TAG = "pcm.BlockBrawlViewModel"
     }
+
+    override lateinit var musicPlayer: MediaPlayer
 
     lateinit var navController: NavHostController
 

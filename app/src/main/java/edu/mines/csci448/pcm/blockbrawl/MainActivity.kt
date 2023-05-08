@@ -1,6 +1,7 @@
 package edu.mines.csci448.pcm.blockbrawl
 
 import android.app.LocalActivityManager
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -43,6 +44,7 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             (mBlockBrawlViewModel as BlockBrawlViewModel).navController = navController
             val context = LocalContext.current
+            mBlockBrawlViewModel.musicPlayer = MediaPlayer.create(context, R.raw.music)
 
             BlockBrawlTheme {
                 Scaffold(topBar = {

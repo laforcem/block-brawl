@@ -1,15 +1,17 @@
 package edu.mines.csci448.pcm.blockbrawl.presentation.gamescreen
+import android.content.Context
+import android.media.MediaPlayer
 import android.util.Log
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectDragGestures
-import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -17,6 +19,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.MultiParagraph
 import androidx.compose.ui.text.TextLayoutInput
@@ -28,7 +31,10 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import edu.mines.csci448.pcm.blockbrawl.R
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
+import edu.mines.olsgard_a4.util.DataStoreManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -41,8 +47,28 @@ import kotlin.math.roundToInt
 fun GameScreen(
     blockList: List<Block>,
     onGameOver: (Int) -> Unit,
+    context: Context,
+    musicPlayer: MediaPlayer
 )
 {
+    // Settings
+    val dataStoreManager = remember { DataStoreManager(context) }
+    val lifecycleOwner = LocalLifecycleOwner.current
+    val musicState = dataStoreManager
+        .musicDataflow
+        .collectAsStateWithLifecycle(
+            initialValue = true,
+            lifecycle = lifecycleOwner.lifecycle
+        )
+    val sfxState = dataStoreManager
+        .sfxDataflow
+        .collectAsStateWithLifecycle(
+            initialValue = true,
+            lifecycle = lifecycleOwner.lifecycle
+        )
+
+
+
     /*
     // Defining game variables
     */
@@ -85,7 +111,7 @@ fun GameScreen(
     Box(modifier = Modifier.fillMaxWidth().weight(0.04f)){
         Row(){
             Text(text = getTimerText(timer.value), modifier = Modifier.weight(0.33f), textAlign = TextAlign.Center)
-            Button(onClick = { timer.value = 0.0f } ,modifier = Modifier.weight(0.33f).defaultMinSize(minWidth = 1.dp, minHeight = 1.dp), contentPadding = PaddingValues(0.dp, 3.dp)){
+            Button(onClick = {  if (musicState.value){ musicPlayer.stop() }; timer.value = 0.0f } ,modifier = Modifier.weight(0.33f).defaultMinSize(minWidth = 1.dp, minHeight = 1.dp), contentPadding = PaddingValues(0.dp, 3.dp)){
                 Text("End Game")
             }
             Text(text = "Score: " + score.value.toString(), modifier = Modifier.weight(0.33f), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold)
@@ -106,6 +132,9 @@ fun GameScreen(
         if (!boardInit.value){
             currentBlockListState.value.forEach { block ->
                 block.setPosition(canvasWidth, boardWidth, boardTopLeft_y + (WIDTH)*(boardHeight) - 6)
+            }
+            if (musicState.value){
+                musicPlayer.start()
             }
             boardInit.value = true
         }

@@ -1,5 +1,6 @@
 package edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel
 
+import android.media.MediaPlayer
 import android.util.Log
 import androidx.navigation.NavHostController
 import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlLevel
@@ -18,6 +19,8 @@ class PreviewBlockBrawlViewModel() :
     }
 
     lateinit var navController: NavHostController
+
+    override lateinit var musicPlayer: MediaPlayer
 
     private val mTitleTextState: MutableStateFlow<String> = MutableStateFlow("")
     override val titleTextState: StateFlow<String>

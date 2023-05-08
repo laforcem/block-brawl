@@ -1,11 +1,13 @@
 package edu.mines.csci448.pcm.blockbrawl.presentation.navigation.specs
 
 import android.content.Context
+import android.media.MediaPlayer
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.*
+import edu.mines.csci448.pcm.blockbrawl.R
 import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlLevel
 import edu.mines.csci448.pcm.blockbrawl.presentation.gamescreen.Block
 import edu.mines.csci448.pcm.blockbrawl.presentation.gamescreen.GameScreen
@@ -57,7 +59,9 @@ object GameScreenSpec : IScreenSpec {
                 blockList = blockBrawlViewModel.getBlockList(level),
                 onGameOver = {
                     blockBrawlViewModel.addLevelStats(BlockBrawlLevel(userName = username, completed = true, levelNumber = level, score = it))
-                }
+                },
+                context,
+                blockBrawlViewModel.musicPlayer
             )
         }
     }
