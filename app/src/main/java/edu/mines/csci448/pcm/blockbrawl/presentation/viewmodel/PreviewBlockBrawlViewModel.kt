@@ -3,6 +3,7 @@ package edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel
 import android.util.Log
 import androidx.navigation.NavHostController
 import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlLevel
+import edu.mines.csci448.pcm.blockbrawl.presentation.gamescreen.Block
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -11,6 +12,7 @@ import java.util.UUID
 
 class PreviewBlockBrawlViewModel() :
     IBlockBrawlViewModel {
+
     companion object {
         private const val LOG_TAG = "pcm.BlockBrawlViewModel"
     }
@@ -90,5 +92,9 @@ class PreviewBlockBrawlViewModel() :
 
     override fun getBestLevelStats(levelNumber: Int) {
 
+    }
+
+    override fun getBlockList(levelNumber: Int): List<Block> {
+        return emptyList()
     }
 }

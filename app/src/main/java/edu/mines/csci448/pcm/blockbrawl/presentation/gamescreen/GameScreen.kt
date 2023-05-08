@@ -4,6 +4,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -25,6 +26,7 @@ import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel.IBlockBrawlViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -76,24 +78,30 @@ fun GameScreen(
         }
     }
 
+    Column(){
+
+
     //Display timer and Score
-    Box(modifier = Modifier.fillMaxWidth()){
+    Box(modifier = Modifier.fillMaxWidth().weight(0.04f)){
         Row(){
-            Text(text = getTimerText(timer.value), modifier = Modifier.weight(0.5f), textAlign = TextAlign.Center)
-            Text(text = "Score: " + score.value.toString(), modifier = Modifier.weight(0.5f), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold)
+            Text(text = getTimerText(timer.value), modifier = Modifier.weight(0.33f), textAlign = TextAlign.Center)
+            Button(onClick = { timer.value = 0.0f } ,modifier = Modifier.weight(0.33f).defaultMinSize(minWidth = 1.dp, minHeight = 1.dp), contentPadding = PaddingValues(0.dp, 3.dp)){
+                Text("End Game")
+            }
+            Text(text = "Score: " + score.value.toString(), modifier = Modifier.weight(0.33f), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold)
         }
     }
 
     BoxWithConstraints(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth().weight(0.96f)
     ){
         //Defining game variables that depend on canvas size
         val canvasWidth = LocalDensity.current.run { maxWidth.toPx()}
         val canvasHeight = LocalDensity.current.run { maxHeight.toPx()}
         val WIDTH = canvasWidth / (boardWidth + 1)
         val boardTopLeft_x = WIDTH/2
-        val boardTopLeft_y = (canvasHeight - (WIDTH)*boardHeight + WIDTH/2)/2
+        val boardTopLeft_y = (canvasHeight - (WIDTH)*boardHeight + WIDTH)/2
 
         if (!boardInit.value){
             currentBlockListState.value.forEach { block ->
@@ -224,6 +232,7 @@ fun GameScreen(
             }
 
         }
+    }
     }
 }
 

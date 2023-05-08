@@ -36,7 +36,7 @@ object MainMenuScreenSpec : IScreenSpec{
     ) {
         MainMenuScreen(
             blockBrawlViewModel,
-            { navController.navigate( GameScreenSpec.route ) },
+            { navController.navigate( LevelSelectScreenSpec.route ) },
             { navController.navigate( LeaderboardListScreenSpec.route ) },
             { navController.navigate( SettingsScreenSpec.route ) }
         )
