@@ -104,8 +104,14 @@ class Block(
         else if (value == 20){  // purple
             return Color(0xFFdf8af2)
         }
+        else if (value == 25){ // orange
+            return Color(0xFFF2C38A)
+        }
         else if (value == 30){  // yellow
             return Color(0xFFf2ed8a)
+        }
+        else if (value == 35){  // greenish blue
+            return Color(0xFF8AF2D5)
         }
         return Color.Black
     }
