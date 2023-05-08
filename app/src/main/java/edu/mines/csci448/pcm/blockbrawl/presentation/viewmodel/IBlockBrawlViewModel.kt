@@ -1,11 +1,11 @@
 package edu.mines.csci448.pcm.blockbrawl.presentation.viewmodel
 
 import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlLevel
+import edu.mines.csci448.pcm.blockbrawl.presentation.gamescreen.Block
 import kotlinx.coroutines.flow.StateFlow
 import java.util.*
 
 interface IBlockBrawlViewModel {
-    // TODO: Refactor project to use this interface
     val soundFxState: StateFlow<Boolean>
     val musicState: StateFlow<Boolean>
     val titleTextState: StateFlow<String>
@@ -22,4 +22,5 @@ interface IBlockBrawlViewModel {
     fun setUsername(username: String)
     fun getStatsByLevelNumber(levelNumber: Int)
     fun getBestLevelStats(levelNumber: Int)
+    fun getBlockList(levelNumber: Int): List<Block>
 }

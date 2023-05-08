@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlLevel
 import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlRepo
 import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlUser
+import edu.mines.csci448.pcm.blockbrawl.presentation.gamescreen.Block
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.*
@@ -122,5 +123,9 @@ class BlockBrawlViewModel(private val blockBrawlRepo: BlockBrawlRepo) : ViewMode
                 }
             }
         }
+    }
+
+    override fun getBlockList(levelNumber: Int): List<Block> {
+        return blockBrawlRepo.levelBlocks[levelNumber - 1]
     }
 }
