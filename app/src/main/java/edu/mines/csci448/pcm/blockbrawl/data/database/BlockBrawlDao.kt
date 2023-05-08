@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.RewriteQueriesToDropUnusedColumns
 import edu.mines.csci448.pcm.blockbrawl.data.BlockBrawlLevel
 import kotlinx.coroutines.flow.Flow
 import java.util.*
@@ -18,7 +19,7 @@ interface BlockBrawlDao {
     suspend fun getStatsByLevelId(id: UUID): BlockBrawlLevel?
     @Query("SELECT * FROM levels WHERE levelNumber=(:levelNumber)")
     fun getStatsByLevelNumber(levelNumber: Int):  Flow<List<BlockBrawlLevel>>
-    @Query("SELECT MAX(score), * FROM levels WHERE userName LIKE (:userName) AND completed AND levelNumber=(:levelNumber)")
+    @Query("SELECT DISTINCT * FROM levels WHERE score = (SELECT DISTINCT MAX(score) FROM levels WHERE userName LIKE (:userName) AND completed AND levelNumber=(:levelNumber))")
     fun getBestLevelStats(userName: String, levelNumber: Int):  Flow<List<BlockBrawlLevel>>
     @Delete
     suspend fun deleteLevel(level: BlockBrawlLevel)

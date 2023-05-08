@@ -110,21 +110,19 @@ class BlockBrawlViewModel(private val blockBrawlRepo: BlockBrawlRepo) : ViewMode
         Log.d(LOG_TAG, "fetching level stats for level $levelNumber")
         viewModelScope.launch {
             blockBrawlRepo.getStatsByLevelNumber(levelNumber).collect{ levelList ->
+                Log.d(LOG_TAG, "updating list to $levelList")
                 mLevels.update { levelList }
+                Log.d(LOG_TAG, "updating list to ${mLevels.value}")
             }
         }
     }
 
     override fun getBestLevelStats(levelNumber: Int) {
-        Log.d(LOG_TAG, "fetching best level stats for user $username")
+        Log.d(LOG_TAG, "fetching best level stats for user ${username.value}")
         viewModelScope.launch {
             blockBrawlRepo.getBestLevelStats(username.value, levelNumber).collect{ levelList ->
-                if(levelList.isNotEmpty()) {
-                    mLevels.update { levelList }
-                }
-                else {
-                    mLevels.update { emptyList() }
-                }
+                Log.d(LOG_TAG, "updating list to $levelList")
+                mLevels.update { levelList }
             }
         }
     }
