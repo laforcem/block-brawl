@@ -20,4 +20,7 @@
 
     <string name ="app_bar_back_desc">Back Button</string>
     <string name="personal_stats_title">Personal Stats</string>
+
+    <string name="notification_title">Hey it\'s been a while</string>
+    <string name="notification_text">You should come play!</string>
 </resources>
