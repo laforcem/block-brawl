@@ -10,10 +10,12 @@ import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -41,6 +43,7 @@ fun SettingsScreen(context: Context) {
 
     val dataStoreManager = remember { DataStoreManager(context) }
     val lifecycleOwner = LocalLifecycleOwner.current
+    val coroutineScope = rememberCoroutineScope()
     val musicState = dataStoreManager
         .musicDataflow
         .collectAsStateWithLifecycle(
@@ -67,12 +70,13 @@ fun SettingsScreen(context: Context) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(80.dp)
-                        .padding(20.dp)
+                        .padding(20.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    Checkbox(
+                    Switch(
                         checked = sfxState.value,
                         onCheckedChange ={
-                            lifecycleOwner.lifecycleScope.launch {
+                            coroutineScope.launch {
                                 dataStoreManager.setSfx(it)
                             }
                         },
@@ -92,12 +96,13 @@ fun SettingsScreen(context: Context) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(80.dp)
-                        .padding(20.dp)
+                        .padding(20.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    Checkbox(
+                    Switch(
                         checked = musicState.value,
                         onCheckedChange ={
-                            lifecycleOwner.lifecycleScope.launch {
+                            coroutineScope.launch {
                                 dataStoreManager.setMusic(it)
                             }
                         },                        modifier = Modifier.scale(1.5f)

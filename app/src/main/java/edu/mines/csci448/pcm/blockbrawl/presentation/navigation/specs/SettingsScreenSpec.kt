@@ -26,7 +26,6 @@ object SettingsScreenSpec : IScreenSpec{
         navBackStackEntry: NavBackStackEntry,
         context: Context
     ) {
-
         SettingsScreen(context)
     }
 }
